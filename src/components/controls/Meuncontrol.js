@@ -5,6 +5,8 @@ import { Accordion, Button, Modal } from 'react-bootstrap';
 //mui
 import { Box, Tab, Switch, Checkbox } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import CompareIcon from '@mui/icons-material/Compare';
+import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
 //apexcharts
 import ReactApexChart from 'react-apexcharts';
 
@@ -180,10 +182,10 @@ const Meuncontrol = ({ onLayerToggle }) => {
             <TabContext value={value}>
             <Box sx={{ borderRight: 1, borderColor: 'divider', Width: '70px' }}>
               <TabList orientation="vertical" onChange={handleTabChange} aria-label="Vertical tabs example">
-                <Tab label="인" value="1" style={{minWidth:'50px'}}/>
-                <Tab label="토 " value="2" style={{minWidth:'50px'}}/>
-                <Tab label="오" value="3" style={{minWidth:'50px'}}/>
-                <Tab label="W " value="4" style={{minWidth:'50px'}}/>
+                <Tab value="1" style={{ minWidth: '50px' }} icon={<CompareIcon />} />
+                <Tab label="토" value="2" style={{minWidth:'50px'}}/>
+                <Tab value="3" style={{ minWidth: '50px' }} icon={<EmergencyShareIcon />} />
+                <Tab label="수" value="4" style={{minWidth:'50px'}}/>
               </TabList>
           </Box>
           <Box sx={{ flexGrow: 1, p: 3,  overflow:'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none' } }>
