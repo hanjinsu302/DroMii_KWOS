@@ -1,0 +1,11 @@
+
+<krpano version="2.0.0" title="Virtual Tour">
+  <!-- krpano 설정들 -->
+  <scene name="scene1" title="Scene 1">
+    <view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" />
+    <image>
+      <cube url="panos/DJI_0178.jpg" />
+      <!-- <sphere url="panos/DJI_0178.jpg"/> -->
+    </image>
+  </scene>
+</krpano>
