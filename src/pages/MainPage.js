@@ -94,13 +94,13 @@ const MainPage = () => {
       name: "영주댐",
       acode: "a_1",
       image:'https://img.khan.co.kr/news/2023/08/22/news-p.v1.20221003.a1d343957d8643ffa86dc376aef74701_P1.webp',
-      coordinate: [128.625, 36.805],
+      coordinate: [128.6552, 36.7234],
       description: "영주댐입니다"
     },
     {
       name: "용담댐",
       acode: "a_2",
-      coordinate: [127.483, 36.117],
+      coordinate: [127.5256, 35.9448],
       description: "용담댐입니다"
     },
     {
@@ -195,7 +195,7 @@ const MainPage = () => {
       if (feature) {
         const features = feature.get('features');
         if (features.length === 1) {
-          navigate('/Mappage');
+          navigate('/YeongjuPage');
         }
       }
     });

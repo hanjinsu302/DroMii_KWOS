@@ -33,11 +33,13 @@ import Form from 'react-bootstrap/Form';
       const leftView = new View({
         center: fromLonLat(yeongjuCoords), // 초기 좌표값을 영주시로 설정
         zoom: 10.5,
+        minZoom: 10.5,
       });
 
       const rightView = new View({
         center: fromLonLat(yeongjuCoords),//초기 좌표값
         zoom: 10.5,
+        minZoom: 10.5,
       });
 
       const leftMap = new Map({
