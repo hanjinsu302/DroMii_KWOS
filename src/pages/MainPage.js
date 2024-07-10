@@ -16,69 +16,7 @@ import Overlay from 'ol/Overlay';
 import { useNavigate } from 'react-router-dom';
 import dam from '../assets/dam.png'
 
-// Styled components
-const MapContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-`;
 
-const Popup = styled.div`
-  position: absolute;
-  background-color: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #cccccc;
-  bottom: 20px;
-  left: -40px;
-  min-width: 180px;
-  min-height: 200px;
-  &:after, &:before {
-    top: 100%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-  &:after {
-    border-top-color: white;
-    border-width: 10px;
-    left: 50%;
-    margin-left: -10px;
-  }
-  &:before {
-    border-top-color: #cccccc;
-    border-width: 11px;
-    left: 50%;
-    margin-left: -11px;
-  }
-`;
-
-const PopupCloser = styled.a`
-  text-decoration: none;
-  position: absolute;
-  top: 2px;
-  right: 8px;
-  &:after {
-    content: "✖";
-  }
-`;
-
-const PopupContent = styled.div`
-  color: #333;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-`;
-
-const PopupImageBox = styled.div`
-  width: 100px;
-  height: 150px;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 10px;
-`;
 
 // MainPage component
 const MainPage = () => {
@@ -95,25 +33,29 @@ const MainPage = () => {
       acode: "a_1",
       image:'https://img.khan.co.kr/news/2023/08/22/news-p.v1.20221003.a1d343957d8643ffa86dc376aef74701_P1.webp',
       coordinate: [128.6552, 36.7234],
-      description: "영주댐입니다"
+      description: "영주댐입니다",
+      page:"YeongjuPage"
     },
     {
       name: "용담댐",
       acode: "a_2",
       coordinate: [127.5256, 35.9448],
-      description: "용담댐입니다"
+      description: "용담댐입니다",
+      page:"YongdamPage"
     },
     {
       name: "서울댐",
       acode: "a_3",
       coordinate: [127.269311, 37.413294],
-      description: "서울댐입니다"
+      description: "서울댐입니다",
+      page:"SeoulPage"
     },
     {
       name: "부산댐",
       acode: "a_4",
       coordinate: [128.7384361, 35.3959361],
-      description: "부산댐입니다"
+      description: "부산댐입니다",
+      page:"BusanPage"
     }
   ];
 
@@ -127,7 +69,8 @@ const MainPage = () => {
         geometry: new Point(fromLonLat(area.coordinate)),
         name: area.name,
         image: area.image,
-        description: area.description
+        description: area.description,
+        page: area.page
       }))
     });
 
@@ -195,7 +138,8 @@ const MainPage = () => {
       if (feature) {
         const features = feature.get('features');
         if (features.length === 1) {
-          navigate('/YeongjuPage');
+          const page = features[0].get('page');
+          navigate(`/${page}`);
         }
       }
     });
@@ -220,3 +164,68 @@ export default MainPage;
 
 
 const PopupImage = styled.div``
+
+
+// Styled components
+const MapContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+`;
+
+const Popup = styled.div`
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 20px;
+  left: -40px;
+  min-width: 180px;
+  min-height: 200px;
+  &:after, &:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 50%;
+    margin-left: -10px;
+  }
+  &:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 50%;
+    margin-left: -11px;
+  }
+`;
+
+const PopupCloser = styled.a`
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  &:after {
+    content: "✖";
+  }
+`;
+
+const PopupContent = styled.div`
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+`;
+
+const PopupImageBox = styled.div`
+  width: 100px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+`;

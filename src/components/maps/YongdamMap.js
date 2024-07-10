@@ -8,11 +8,29 @@ import View from 'ol/View';
 import { Tile as TileLayer } from 'ol/layer';
 import { TileWMS, XYZ, OSM } from 'ol/source';
 import { fromLonLat } from 'ol/proj';
-import 'ol/ol.css';
 import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
+import Draw from 'ol/interaction/Draw';
+import Overlay from 'ol/Overlay';
+import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import { LineString, Polygon } from 'ol/geom';
+import { Vector as VectorSource } from 'ol/source';
+import { Vector as VectorLayer } from 'ol/layer';
+import { getArea, getLength } from 'ol/sphere';
+import { unByKey } from 'ol/Observable';
+import { toCanvas } from 'ol/source/Tile';
+import { Feature } from 'ol';
+import Point from 'ol/geom/Point';
+import { Cluster } from 'ol/source';
+import {  Icon } from 'ol/style';
+import 'ol/ol.css';
 
 import Yongdammeuncontrol from '../controls/Yongdammeuncontrol';
+import YongdamMapcontrol from '../controls/YongdamMapcontrol';
 // import { Container } from 'react-bootstrap';
+
+
+import html2canvas from "html2canvas";
+import saveAs from "file-saver";
 
 const layerConfigurations = [
   { name: '전', url: 'http://localhost:8080/geoserver/yeongju/wms', params: { 'LAYERS': 'yeongju:K_water_field' } },
@@ -29,6 +47,37 @@ const layerConfigurations = [
   { name: '체육용지', url: 'http://localhost:8080/geoserver/yeongju/wms', params: { 'LAYERS': 'yeongju:K_water_athletic' } },
   { name: '유원지', url: 'http://localhost:8080/geoserver/yeongju/wms', params: { 'LAYERS': 'yeongju:K_water_amusementpark' } },
 ];
+const Area = [
+  {
+    name: "호계리 306",
+    acode: "p_1",
+    image:'',
+    coordinate: [127.4633, 35.9392],
+    description: "간접지",
+    indirectLand:'true',//간접지
+    reservoirArea:'false',//저수구역
+  },
+  {
+    name: "호계리 516-2",
+    acode: "p_2",
+    image:'',
+    coordinate: [127.4594, 35.9234],
+    description: "간접지",
+    indirectLand:'true',//간접지
+    reservoirArea:'false',//저수구역
+  },
+  {
+    name: "월포리 1091-2",
+    acode: "p_3",
+    coordinate: [127.4811, 35.8635],
+    image:'',
+    description: "간접지+저수구역",
+    indirectLand:'true',//간접지
+    reservoirArea:'true',//저수구역
+  }
+];
+
+
 
 const YongdamMap = () => {
   const mapRef = useRef(null);
@@ -47,15 +96,187 @@ const YongdamMap = () => {
     return initialState;
   });
 
+
+
+  ///////////////////////////////////////////거리 계산,면적 계산 코드////////////////////////////////////
+  const raster = new TileLayer({
+    source: new OSM(),
+  });
+
+  const source = new VectorSource();
+  const vector = new VectorLayer({
+    source: source,
+    style: new Style({
+      fill: new Fill({
+        color: 'rgba(255, 255, 255, 0.2)',
+      }),
+      stroke: new Stroke({
+        color: '#ffcc33',
+        width: 2,
+      }),
+      image: new CircleStyle({
+        radius: 7,
+        fill: new Fill({
+          color: '#ffcc33',
+        }),
+      }),
+    }),
+  });
+
+  let sketch;
+  let helpTooltipElement;
+  let helpTooltip;
+  let measureTooltipElement;
+  let measureTooltip;
+  const continuePolygonMsg = 'Click to continue drawing the polygon';
+  const continueLineMsg = 'Click to continue drawing the line';
+
+  const pointerMoveHandler = function (evt) {
+    if (evt.dragging) {
+      return;
+    }
+    let helpMsg = 'Click to start drawing';
+
+    if (sketch) {
+      const geom = sketch.getGeometry();
+      if (geom instanceof Polygon) {
+        helpMsg = continuePolygonMsg;
+      } else if (geom instanceof LineString) {
+        helpMsg = continueLineMsg;
+      }
+    }
+
+    helpTooltipElement.innerHTML = helpMsg;
+    helpTooltip.setPosition(evt.coordinate);
+
+    helpTooltipElement.classList.remove('hidden');
+  };
+
+  const formatLength = function (line) {
+    const length = getLength(line);
+    let output;
+    if (length > 100) {
+      output = Math.round((length / 1000) * 100) / 100 + ' km';
+    } else {
+      output = Math.round(length * 100) / 100 + ' m';
+    }
+    return output;
+  };
+
+  const formatArea = function (polygon) {
+    const area = getArea(polygon);
+    let output;
+    if (area > 10000) {
+      output = Math.round((area / 1000000) * 100) / 100 + ' km²';
+    } else {
+      output = Math.round(area * 100) / 100 + ' m²';
+    }
+    return output;
+  };
+
+  const createHelpTooltip = () => {
+    if (helpTooltipElement) {
+      helpTooltipElement.parentNode.removeChild(helpTooltipElement);
+    }
+    helpTooltipElement = document.createElement('div');
+    helpTooltipElement.className = 'ol-tooltip hidden';
+    helpTooltip = new Overlay({
+      element: helpTooltipElement,
+      offset: [15, 0],
+      positioning: 'center-left',
+    });
+    mapInstance.current.map.addOverlay(helpTooltip);
+  };
+
+  const createMeasureTooltip = () => {
+    if (measureTooltipElement) {
+      measureTooltipElement.parentNode.removeChild(measureTooltipElement);
+    }
+    measureTooltipElement = document.createElement('div');
+    measureTooltipElement.className = 'ol-tooltip ol-tooltip-measure';
+    measureTooltip = new Overlay({
+      element: measureTooltipElement,
+      offset: [0, -15],
+      positioning: 'bottom-center',
+      stopEvent: false,
+      insertFirst: false,
+    });
+    mapInstance.current.map.addOverlay(measureTooltip);
+  };
+
+  const addInteraction = (type) => {
+    const draw = new Draw({
+      source: source,
+      type: type,
+      style: new Style({
+        fill: new Fill({
+          color: 'rgba(255, 125, 5, 0.4)',
+        }),
+        stroke: new Stroke({
+          color: '#FF9900',
+          width: 2,
+        }),
+        image: new CircleStyle({
+          radius: 7,
+          fill: new Fill({
+            color: '#FF9900',
+          }),
+        }),
+      }),
+    });
+    mapInstance.current.map.addInteraction(draw);
+
+    createMeasureTooltip();
+    createHelpTooltip();
+
+    let listener;
+    draw.on('drawstart', (evt) => {
+      sketch = evt.feature;
+
+      let tooltipCoord = evt.coordinate;
+
+      listener = sketch.getGeometry().on('change', (evt) => {
+        const geom = evt.target;
+        let output;
+        if (geom instanceof Polygon) {
+          output = formatArea(geom);
+          tooltipCoord = geom.getInteriorPoint().getCoordinates();
+        } else if (geom instanceof LineString) {
+          output = formatLength(geom);
+          tooltipCoord = geom.getLastCoordinate();
+        }
+        measureTooltipElement.innerHTML = output;
+        measureTooltip.setPosition(tooltipCoord);
+      });
+    });
+
+    draw.on('drawend', () => {
+      measureTooltipElement.className = 'ol-tooltip ol-tooltip-static';
+      measureTooltip.setOffset([0, -7]);
+      sketch = null;
+      measureTooltipElement = null;
+      createMeasureTooltip();
+      unByKey(listener);
+    });
+
+    mapInstance.current.draw = draw;
+  };
+
+  const clearMeasurements = () => {
+    source.clear();
+    mapInstance.current.map.getOverlays().clear();
+  };
+
+
   const scaleLineControl = new ScaleLine({
     units: 'metric',
   });
-
+///////////////////////////////////지도 생성 코드
   const createMap = () => {
     const osmLayer = new TileLayer({
       source: new OSM(),
     });
-
+///vworld 지도
     const vworldLayer = new TileLayer({
 
       source: new XYZ({
@@ -66,7 +287,7 @@ const YongdamMap = () => {
       }),
       visible: mapType === '3',
     });
-
+// 지역 AOI
     const wmsLayer1 = new TileLayer({
       source: new TileWMS({
         url: 'http://localhost:8080/geoserver/yongdam/wms',
@@ -79,7 +300,7 @@ const YongdamMap = () => {
       }),
       visible: visibleLayers.wmsLayer1,
     });
-
+// 하천 레이어
     const wmsLayer2 = new TileLayer({
       source: new TileWMS({
         url: 'http://localhost:8080/geoserver/yongdam/wms',
@@ -91,7 +312,7 @@ const YongdamMap = () => {
       }),
       visible: visibleLayers.wmsLayer2,
     });
-
+// 지적도 레이어
     const wmsLayer3 = new TileLayer({
       source: new TileWMS({
         url: 'http://localhost:8080/geoserver/yeongju/wms',
@@ -129,17 +350,47 @@ const YongdamMap = () => {
       }
     });
 
-    osmLayer.on('postrender', (evt) => {
-      if (evt.context) {
-        const context = evt.context;
-        context.filter = 'none';
-      }
+
+    const vectorSources = new VectorSource({
+      features: Area.map(area => new Feature({
+        geometry: new Point(fromLonLat(area.coordinate)),
+        name: area.name,
+        image: area.image,
+        description: area.description,
+        page: area.page
+      }))
     });
 
+    const clusterSource = new Cluster({
+      distance: 40,
+      source: vectorSources
+    });
+
+    const clusterLayer = new VectorLayer({
+      source: clusterSource,
+      style: (feature) => {
+        const size = feature.get('features').length;
+        return new Style({
+          image: new CircleStyle({
+            radius: 22 + Math.min(size / 200, 200),  // 클러스터 크기에 따라 반지름 조정
+            fill: new Fill({
+              color: 'rgba(5, 45, 255, 0.6)',  // 원형 내부 색상
+            }),
+            stroke: new Stroke({
+              color: '#0E18FF',  // 원형 테두리 색상
+              width: 1,
+            }),
+          }),
+          
+        });
+      },
+    });
+
+   
     const map = new Map({
       controls: defaultControls().extend([scaleLineControl]),
       target: mapRef.current,
-      layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, ...Object.values(additionalLayersConfig)],
+      layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, clusterLayer,vector, ...Object.values(additionalLayersConfig)],
       view: new View({
         center: fromLonLat([127.5256, 35.8848]),
         zoom: 12,
@@ -149,7 +400,8 @@ const YongdamMap = () => {
       
     });
 
-    mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer, ...additionalLayersConfig } };
+    mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer, ...additionalLayersConfig }
+   };
   };
 
   useEffect(() => {
@@ -178,6 +430,8 @@ const YongdamMap = () => {
     }
   }, [additionalLayers]);
 
+  
+
   const handleLayerVisibility = (layer) => {
     setVisibleLayers((prevState) => ({
       ...prevState,
@@ -192,12 +446,42 @@ const YongdamMap = () => {
     }));
   };
 
+  const handleMeasureButtonClick = (type) => {
+    if (mapInstance.current.draw) {
+      mapInstance.current.map.removeInteraction(mapInstance.current.draw);
+    }
+    addInteraction(type);
+  };
+
+
+  /////
+  
+  const divRef = useRef(null);
+
+  const handleDownload = async () => {
+    if (!divRef.current) return;
+
+    try {
+      const div = divRef.current;
+      const canvas = await html2canvas(div, { scale: 2 });
+      canvas.toBlob((blob) => {
+        if (blob !== null) {
+          saveAs(blob, "result.png");
+        }
+      });
+    } catch (error) {
+      console.error("Error converting div to image:", error);
+    }
+  };
+  //html 요소는 촬영이 되지만 openlayers의 canvas요소는 촬영이 안됨
+  
+
   return (
     <>
-    <Container>
+    <Container ref={divRef}>
       <Yongdammeuncontrol onLayerToggle={handleAdditionalLayerVisibility} />
-      <Mapcontrol onSelectMapType={setMapType} onLayerToggle={handleLayerVisibility} />
-      <div ref={mapRef} style={{ width: '100%', height: '100vh' }}></div>
+      <YongdamMapcontrol onSelectMapType={setMapType} onLayerToggle={handleLayerVisibility} onMeasureDistance={() => handleMeasureButtonClick('LineString')} onMeasureArea={() => handleMeasureButtonClick('Polygon')} onClearMeasurements={clearMeasurements} onCapture= {handleDownload}/>
+        <div ref={mapRef} style={{ width: '100%', height: '100vh' }} ></div>
       </Container>
     </>
   );
@@ -206,4 +490,42 @@ const YongdamMap = () => {
 export default YongdamMap;
 
 const Container = styled.div`
-display:flex;`
+display:flex;
+.ol-tooltip {
+        position: relative;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        color: white;
+        padding: 4px 8px;
+        opacity: 0.7;
+        white-space: nowrap;
+        font-size: 12px;
+        cursor: default;
+        user-select: none;
+      }
+      .ol-tooltip-measure {
+        opacity: 1;
+        font-weight: bold;
+      }
+      .ol-tooltip-static {
+        background-color: #ffcc33;
+        color: black;
+        border: 1px solid white;
+      }
+      .ol-tooltip-measure:before,
+      .ol-tooltip-static:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+      }
+      .ol-tooltip-static:before {
+        border-top-color: #ffcc33;
+      }
+`
+
+const MapBox = styled.div``;

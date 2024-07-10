@@ -10,6 +10,7 @@ import YeongjuPage from './pages/YeongjuPage.js';
 //bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HeatmapMap from './components/maps/Hitmap.js';
+import MyComponent from './pages/TestPage.js';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/krpano' element={<KrpanoViewer/>}/>
         <Route path='/hitmap' element={<HeatmapMap/>}/>
         <Route path='/photosphere' element={<PhotoSphere/>}/>
+        <Route path='/testpage' element={<MyComponent/>}/>
 
       </Routes>
     </BrowserRouter>

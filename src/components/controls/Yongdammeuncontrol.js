@@ -7,6 +7,14 @@ import { Box, Tab, Switch, Checkbox } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import CompareIcon from '@mui/icons-material/Compare';
 import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ImageIcon from '@mui/icons-material/Image';
+import WorkIcon from '@mui/icons-material/Work';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 //apexcharts
 import ReactApexChart from 'react-apexcharts';
 const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
@@ -45,32 +53,7 @@ const Yongdammeuncontrol = ({ onLayerToggle }) => {
     { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_amusementpark' } },
   ];
     
-      const layersNDWI = [
-        {
-            name: 'NDWI(20220509)',
-            url: `${geoserverUrl}/cite/wms`,
-            params: { 'LAYERS': 'cite:NDWI(20220509)' },
-          },
-          {
-            name: 'NDWI(20220509)',
-            url: `${geoserverUrl}/cite/wms`,
-            params: { 'LAYERS': 'cite:NDWI(20230509)' },
-          },
-
-      ]
-
-      const layersNDVI = [
-        {
-            name: 'NDVI(20220509)',
-            url: `${geoserverUrl}/cite/wms`,
-            params: { 'LAYERS': 'cite:NDVI(20220509)' },
-          },
-          {
-            name: 'NDVI(20220509)',
-            url: `${geoserverUrl}/cite/wms`,
-            params: { 'LAYERS': 'cite:NDVI(20230509)' },
-          },
-      ]
+      
 
       const [series, setSeries] = useState([
         {
@@ -153,46 +136,34 @@ const Yongdammeuncontrol = ({ onLayerToggle }) => {
           </Box>
           <Box sx={{ flexGrow: 1, p: 3,  overflow:'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none' } }>
             <TabPanel value="1" style={{padding:'0px'}}>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <ListItem style={{padding:"0px"}}>
+        <ListItemAvatar>
+          <Avatar>
+            <ImageIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="A-1" secondary="용담면 호계리 306" />
+      </ListItem>
+      <ListItem style={{padding:"0px"}}>
+        <ListItemAvatar>
+          <Avatar>
+            <WorkIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="A-2" secondary="용담면 호계리 516-2" />
+      </ListItem>
+      <ListItem style={{padding:"0px"}}>
+        <ListItemAvatar>
+          <Avatar>
+            <BeachAccessIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="B-1" secondary="상전면 월포리 1091-2" />
+      </ListItem>
+    </List>
               
-                  <Accordion style={{ width: '100%' }} alwaysOpen>
-                      <Accordion.Item eventKey="0">
-                          <Accordion.Header>NDVI</Accordion.Header>
-                          <Accordion.Body>
-                          <div>
-                              {layersNDWI.map((layerConfig) => (
-                              <CheckItem key={layerConfig.name}>
-                                  <Checkbox
-                                  checked={layers[layerConfig.name]?.getVisible() || false}
-                                  onChange={(event) => handleChange(event, layerConfig.name)}
-                                  inputProps={{ 'aria-label': layerConfig.name }}
-                                  />
-                                  <label htmlFor={layerConfig.name}>{layerConfig.name}</label>
-                              </CheckItem>
-                              ))}
-                          </div>
-                              
-                          </Accordion.Body>
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="1">
-                          <Accordion.Header>NDWI</Accordion.Header>
-                          <Accordion.Body>
-                              <div>
-                                  {layersNDVI.map((layerConfig) => (
-                                  <CheckItem key={layerConfig.name}>
-                                      <Checkbox
-                                      checked={layers[layerConfig.name]?.getVisible() || false}
-                                      onChange={(event) => handleChange(event, layerConfig.name)}
-                                      inputProps={{ 'aria-label': layerConfig.name }}
-                                      />
-                                      <label htmlFor={layerConfig.name}>{layerConfig.name}</label>
-                                  </CheckItem>
-                                  ))}
-                              </div>
-                        
-                          </Accordion.Body>
-                      </Accordion.Item>
-                      
-                  </Accordion>
+                  
             </TabPanel>
            
             <TabPanel value="2" style={{padding:'0px'}}>
