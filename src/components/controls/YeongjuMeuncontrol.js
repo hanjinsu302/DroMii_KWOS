@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-//bootstrap
+// bootstrap import
 import { Accordion, Button, Modal } from 'react-bootstrap';
-//mui
+// mui import
 import { Box, Tab, Switch, Checkbox } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import CompareIcon from '@mui/icons-material/Compare';
 import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
-//apexcharts
+// apexcharts import
 import ReactApexChart from 'react-apexcharts';
+// .env import
 const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
 
 
