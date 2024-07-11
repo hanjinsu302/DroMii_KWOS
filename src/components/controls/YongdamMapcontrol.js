@@ -147,7 +147,7 @@ const YongdamMapcontrol = ({ onSelectMapType, onLayerToggle, onMeasureDistance, 
               </Tooltip>
             }
           >
-              <LayerBox onClick={() => onLayerToggle('wmsLayer3')}>
+              <LayerBox>
                <GridViewIcon/>
               </LayerBox>
           </OverlayTrigger>
@@ -160,7 +160,7 @@ const YongdamMapcontrol = ({ onSelectMapType, onLayerToggle, onMeasureDistance, 
               </Tooltip>
             }
           >
-              <LayerBox style={{ borderRadius: "0px 0px 5px 5px" }}>
+              <LayerBox onClick={() => onLayerToggle('clusterLayer')} style={{ borderRadius: "0px 0px 5px 5px" }}>
               <PanoramaIcon/>
             </LayerBox>
           </OverlayTrigger>

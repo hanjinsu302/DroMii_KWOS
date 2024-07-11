@@ -87,6 +87,7 @@ const YongdamMap = () => {
     wmsLayer1: true,
     wmsLayer2: true,
     wmsLayer3: true,
+    clusterLayer: true,
   });
   const [additionalLayers, setAdditionalLayers] = useState(() => {
     const initialState = {};
@@ -121,6 +122,7 @@ const YongdamMap = () => {
         }),
       }),
     }),
+    visible: visibleLayers.vector,
   });
 
   let sketch;
@@ -359,11 +361,14 @@ const YongdamMap = () => {
         description: area.description,
         page: area.page
       }))
+      
+      
     });
 
     const clusterSource = new Cluster({
       distance: 40,
       source: vectorSources
+      
     });
 
     const clusterLayer = new VectorLayer({
@@ -384,6 +389,7 @@ const YongdamMap = () => {
           
         });
       },
+      visible: visibleLayers.clusterLayer,
     });
 
    
@@ -400,7 +406,7 @@ const YongdamMap = () => {
       
     });
 
-    mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer, ...additionalLayersConfig }
+    mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer,clusterLayer, ...additionalLayersConfig }
    };
   };
 
@@ -413,10 +419,11 @@ const YongdamMap = () => {
 
   useEffect(() => {
     if (mapInstance.current) {
-      const { wmsLayer1, wmsLayer2, wmsLayer3 } = mapInstance.current.layers;
+      const { wmsLayer1, wmsLayer2, wmsLayer3, clusterLayer } = mapInstance.current.layers;
       wmsLayer1.setVisible(visibleLayers.wmsLayer1);
       wmsLayer2.setVisible(visibleLayers.wmsLayer2);
       wmsLayer3.setVisible(visibleLayers.wmsLayer3);
+      clusterLayer.setVisible(visibleLayers.clusterLayer);
     }
   }, [visibleLayers]);
 
