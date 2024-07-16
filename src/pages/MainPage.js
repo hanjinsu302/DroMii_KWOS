@@ -17,6 +17,7 @@
   import Overlay from 'ol/Overlay';
   // img import
   import dam from '../assets/dam.png'
+  import pin from '../assets/pin.png'
 
 
 
@@ -87,8 +88,8 @@
           const size = feature.get('features').length;
           return new Style({
             image: new Icon({
-              src: dam,  // Replace with the path to your custom image
-              scale: 0.07 + Math.min(size / 300, 0.5),  // Adjust scale based on cluster size
+              src: pin,  // Replace with the path to your custom image
+              scale: 0.4 + Math.min(size / 300, 0.5),  // Adjust scale based on cluster size
               anchor: [0.5, 0.5]
             }),
           });

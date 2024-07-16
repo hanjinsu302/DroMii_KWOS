@@ -21,7 +21,7 @@
           <Route path='/' element={<MainPage/>}/>
           <Route path='/YeongjuPage' element={<YeongjuPage/>}/>
           <Route path='/YongdamPage' element={<YongdamPage/>}/>
-          <Route path='/comparepage' element={<ComparePage/>}/>
+          <Route path='/compare' element={<ComparePage/>}/>
           <Route path='/krpano' element={<KrpanoViewer/>}/>
           <Route path='/hitmap' element={<HeatmapMap/>}/>
           <Route path='/photosphere' element={<PhotoSphere/>}/>

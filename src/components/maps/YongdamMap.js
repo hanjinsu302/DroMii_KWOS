@@ -12,7 +12,7 @@
   import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
   import Draw from 'ol/interaction/Draw';
   import Overlay from 'ol/Overlay';
-  import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+  import { Circle as CircleStyle, Fill, Stroke, Style, Icon } from 'ol/style';
   import { LineString, Polygon } from 'ol/geom';
   import { Vector as VectorSource } from 'ol/source';
   import { Vector as VectorLayer } from 'ol/layer';
@@ -25,6 +25,10 @@
   //react-screenshot import
   import html2canvas from "html2canvas";
   import saveAs from "file-saver";
+  // img
+  import pin from '../../assets/pin.png'
+
+  const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
 
   //k워터 중분류 레이어 임시 데이터
   const layerConfigurations = [
@@ -70,8 +74,28 @@
       description: "간접지+저수구역",
       indirectLand:'true',//간접지
       reservoirArea:'true',//저수구역
+    },
+    {
+      name: "노성리 1091-2",
+      acode: "p_4",
+      coordinate: [127.5484, 35.893],
+      image:'',
+      description: "간접지+저수구역",
+      indirectLand:'true',//간접지
+      reservoirArea:'true',//저수구역
+    },
+    {
+      name: "갈현리 1091-2",
+      acode: "p_5",
+      coordinate: [127.4708, 35.8245],
+      image:'',
+      description: "간접지+저수구역",
+      indirectLand:'true',//간접지
+      reservoirArea:'true',//저수구역
     }
   ];
+
+
 
 
 
@@ -93,6 +117,49 @@
       });
       return initialState;
     });
+
+    const jinanClusterData = [
+      {
+        coordinate: [127.5285, 35.945],  // 진안군 안천면 안용로 747의 좌표
+        name: 'Jinan Cluster',
+        image: 'url/to/image.jpg',  // 필요시 이미지 경로 추가
+        description: 'Jinan Cluster description',
+        page: 'url/to/page'  // 필요시 페이지 링크 추가
+      }
+    ];
+
+
+
+    const jinanVectorSource = new VectorSource({
+      features: jinanClusterData.map(area => new Feature({
+        geometry: new Point(fromLonLat(area.coordinate)),
+        name: area.name,
+        image: area.image,
+        description: area.description,
+        page: area.page
+      }))
+    });
+    
+    const jinanClusterSource = new Cluster({
+      distance: 40,
+      source: jinanVectorSource
+    });
+    
+    // 새로운 클러스터 레이어 생성
+    const jinanClusterLayer = new VectorLayer({
+      source: jinanClusterSource,
+      style: (feature) => {
+        const size = feature.get('features').length;
+        return new Style({
+          image: new Icon({
+            src: pin,  // Replace with the path to your custom image
+            scale: 0.4 + Math.min(size / 300, 0.5),  // Adjust scale based on cluster size
+            anchor: [0.5, 0.5]
+          }),
+        });
+      }
+    });
+    
 
 
 
@@ -289,9 +356,9 @@
   // 지역 AOI
       const wmsLayer1 = new TileLayer({
         source: new TileWMS({
-          url: 'http://localhost:8080/geoserver/yongdam/wms',
+          url: `${geoserverUrl}/yongdamAOI/wms`,
           params: {
-            'LAYERS': 'yongdam:yongdam_AOI',
+            'LAYERS': 'yongdamAOI:yongdamCommonAOI',
             'TILED': true,
           },
           serverType: 'geoserver',
@@ -302,9 +369,9 @@
   // 하천 레이어
       const wmsLayer2 = new TileLayer({
         source: new TileWMS({
-          url: 'http://localhost:8080/geoserver/yongdam/wms',
+          url: `${geoserverUrl}/yongdamAOI/wms`,
           params: {
-            'LAYERS': 'yongdam:yongdam_waterline',
+            'LAYERS': 'yongdamAOI:yongdam_waterline',
           },
           serverType: 'geoserver',
           transition: 0,
@@ -365,6 +432,7 @@
         source: vectorSources
         
       });
+      
       //클러스터 스타일 및 설정 
       const clusterLayer = new VectorLayer({
         source: clusterSource,
@@ -391,16 +459,16 @@
       const map = new Map({
         controls: defaultControls().extend([scaleLineControl]),
         target: mapRef.current,
-        layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, clusterLayer,vector, ...Object.values(additionalLayersConfig)],
+        layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, clusterLayer,vector, jinanClusterLayer,  ...Object.values(additionalLayersConfig)],
         view: new View({
           center: fromLonLat([127.5256, 35.8848]),
-          zoom: 12,
-          minZoom: 12,
+          zoom: 11.5,
+          minZoom: 11.5,
           maxZoom: 19,
         }),
         
       });
-      mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer,clusterLayer, ...additionalLayersConfig }
+      mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer, clusterLayer, jinanClusterLayer,  ...additionalLayersConfig }
     };
     };
 
