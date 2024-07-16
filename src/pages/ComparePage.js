@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { fromLonLat } from 'ol/proj';
@@ -7,6 +7,9 @@ import View from 'ol/View';
 import 'ol/ol.css';
 import TileLayer from 'ol/layer/Tile';
 import { OSM, TileWMS } from 'ol/source';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
+import Button from '@mui/material/Button';
 
 const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
 
@@ -161,6 +164,9 @@ const ComparePage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const images = queryParams.get('images')?.split(',').map(decodeURIComponent) || [];
+  const mapInstancesRef = useRef([]);
+  const [syncEnabled, setSyncEnabled] = useState(false);
+  const [masterMapIndex, setMasterMapIndex] = useState(null);
 
   useEffect(() => {
     const newMapInstances = images.map((imageTitle, index) => {
@@ -186,7 +192,7 @@ const ComparePage = () => {
           }),
         ],
         view: new View({
-          center: fromLonLat([127.5256, 35.9448]), // 적절한 중심 좌표로 변경
+          center: fromLonLat([127.5256, 35.9448]),
           zoom: 10,
           minZoom: 10,
           maxZoom: 19,
@@ -200,6 +206,8 @@ const ComparePage = () => {
       if (map) map.setTarget(`map-${index}`);
     });
 
+    mapInstancesRef.current = newMapInstances;
+
     return () => {
       newMapInstances.forEach((map) => {
         if (map) map.setTarget(null);
@@ -207,15 +215,49 @@ const ComparePage = () => {
     };
   }, [images]);
 
+  useEffect(() => {
+    if (masterMapIndex !== null && syncEnabled) {
+      const masterMap = mapInstancesRef.current[masterMapIndex];
+      if (masterMap) {
+        const syncView = () => {
+          const center = masterMap.getView().getCenter();
+          const zoom = masterMap.getView().getZoom();
+          mapInstancesRef.current.forEach((map, index) => {
+            if (index !== masterMapIndex) {
+              map.getView().setCenter(center);
+              map.getView().setZoom(zoom);
+            }
+          });
+        };
+
+        masterMap.on('moveend', syncView);
+
+        return () => {
+          masterMap.un('moveend', syncView);
+        };
+      }
+    }
+  }, [masterMapIndex, syncEnabled]);
+
+  const handleSyncToggle = (index) => {
+    if (syncEnabled && masterMapIndex === index) {
+      setSyncEnabled(false);
+      setMasterMapIndex(null);
+    } else {
+      setSyncEnabled(true);
+      setMasterMapIndex(index);
+    }
+  };
+
   const getGridTemplate = (count, index) => {
     if (count === 8) return { xs: 3 };
-    if (count === 7) return { xs: index < 4 ? 3 : 4 }; // 위에 4개는 xs=3, 아래 3개는 xs=4
+    if (count === 7) return { xs: index < 4 ? 3 : 4 };
     if (count === 6) return { xs: 4 };
-    if (count === 5) return { xs: index < 3 ? 4 : 6 }; // 위에 3개는 xs=4, 아래 2개는 xs=6
+    if (count === 5) return { xs: index < 3 ? 4 : 6 };
     if (count === 4) return { xs: 6 };
-    if (count === 3) return { xs: index < 2 ? 6 : 12 }; // 위에 2개는 xs=6, 아래 1개는 xs=12
+    if (count === 3) return { xs: index < 2 ? 6 : 12 };
     if (count === 2) return { xs: 6 };
-    return { xs: 12 }; // 기본값, 다른 경우에 대한 처리가 필요하다면 여기에 추가
+    return { xs: 12 };
   };
 
   return (
@@ -228,17 +270,25 @@ const ComparePage = () => {
               key={index}
               style={{
                 width: `${gridTemplate.xs * (100 / 12)}%`,
-                height: images.length <= 2 ? '100%' : '50%', // 1개나 2개인 경우 height 100%, 나머지는 50%
+                height: images.length <= 2 ? '100%' : '50%',
                 boxSizing: 'border-box',
                 padding: '1px',
-                position: 'relative', // position 추가
+                position: 'relative',
               }}
             >
               <div id={`map-${index}`} style={{ width: '100%', height: '100%' }}>
-                {/* 지도 아래에 이미지 타이틀 표시 */}
-                <ImageTitle>
-                  <Titles>{imageTitle}</Titles>
-                </ImageTitle>
+                <div style={{ position: 'absolute', top: '120px', left: '10px', zIndex: 1 }}>
+                  <Btn
+                    variant={syncEnabled && masterMapIndex === index ? 'contained' : 'outlined'}
+                    color="primary"
+                    onClick={() => handleSyncToggle(index)}
+                  >
+                    {syncEnabled && masterMapIndex === index ?   <MyLocationIcon/> : <GpsNotFixedIcon/>}
+                  </Btn>
+                </div>
+                <Titles >
+                  <span style={{  padding: '5px' }}>{imageTitle}</span>
+                </Titles>
               </div>
             </div>
           );
@@ -282,3 +332,12 @@ const Titles = styled.div`
 
 
 
+const Btn = styled.div`
+background-color: white;
+border-radius:5px;
+width:25px;
+height:25px;
+display:flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -462,7 +462,7 @@
         layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, clusterLayer,vector, jinanClusterLayer,  ...Object.values(additionalLayersConfig)],
         view: new View({
           center: fromLonLat([127.5256, 35.8848]),
-          zoom: 11.5,
+          zoom: 11,
           minZoom: 11.5,
           maxZoom: 19,
         }),
