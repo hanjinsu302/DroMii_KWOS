@@ -343,7 +343,6 @@
       return (
         <>
           <MeunContainer>
-          
             <Box sx={{ display: 'flex', height: '100vh' ,width:'350px', backgroundColor:'white'}}>
               <TabContext value={value}>
                 <Box sx={{ borderRight: 1, borderColor: 'divider', Width: '70px' }}>
@@ -354,44 +353,48 @@
                 </Box>
                 <Box sx={{ flexGrow: 1, p: 3,  overflow:'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none' } }>
                     <TabPanel value="1" style={{padding:'0px'}}>
-                      전체지역
-                        <Button 
-                          variant="contained" 
-                          color="primary" 
-                          onClick={handleCompare}
-                          disabled={checked.length < 2 || checked.length > 8}
-                          style={{marginLeft:'105px'}}
-                        >
-                          비교하기
-                        </Button>
+                
+                          전체지역
+                            <Button 
+                              variant="contained" 
+                              color="primary" 
+                              onClick={handleCompare}
+                              disabled={checked.length < 2 || checked.length > 8}
+                              style={{marginLeft:'105px'}}
+                            >
+                              비교하기
+                            </Button>
+
+                   
+                        
+                        <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            2024년
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                              {renderListItems(tiff2024)}
+                            </List>
+                          </AccordionDetails>
+                        </Accordion>
                         <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          2024년
-        </AccordionSummary>
-        <AccordionDetails>
-          <List>
-            {renderListItems(tiff2024)}
-          </List>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-        >
-          2023년
-        </AccordionSummary>
-        <AccordionDetails>
-          <List>
-            {renderListItems(tiff2023)}
-          </List>
-        </AccordionDetails>
-      </Accordion>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                          >
+                            2023년
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                              {renderListItems(tiff2023)}
+                            </List>
+                          </AccordionDetails>
+                        </Accordion>
                     </TabPanel>
                   <TabPanel value="2" style={{padding:'0px'}}>
                     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -570,3 +573,6 @@
         font-size:12px;
         padding-left:15px;
       `;
+
+
+      
