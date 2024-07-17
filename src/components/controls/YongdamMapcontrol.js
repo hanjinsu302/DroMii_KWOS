@@ -127,7 +127,7 @@
                 </Tooltip>
               }
             >
-                <LayerBox>
+                <LayerBox onClick={() => onLayerToggle('wmsLayer3')}>
                 <GridViewIcon/>
                 </LayerBox>
             </OverlayTrigger>

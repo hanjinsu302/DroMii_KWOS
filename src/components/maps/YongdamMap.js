@@ -381,9 +381,9 @@
   // 지적도 레이어
       const wmsLayer3 = new TileLayer({
         source: new TileWMS({
-          url: 'http://localhost:8080/geoserver/yeongju/wms',
+          url: 'http://localhost:8080/geoserver/yongdam/wms',
           params: {
-            'LAYERS': 'yeongju_sewage_treatment_plant',
+            'LAYERS': 'yongdam:pdf_all',
           },
           serverType: 'geoserver',
           transition: 0,
@@ -464,7 +464,7 @@
           center: fromLonLat([127.5256, 35.8848]),
           zoom: 11,
           minZoom: 11.5,
-          maxZoom: 19,
+          maxZoom: 21,
         }),
         
       });

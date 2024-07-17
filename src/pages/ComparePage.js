@@ -286,9 +286,12 @@ const ComparePage = () => {
                     {syncEnabled && masterMapIndex === index ?   <MyLocationIcon/> : <GpsNotFixedIcon/>}
                   </Btn>
                 </div>
-                <Titles >
-                  <span style={{  padding: '5px' }}>{imageTitle}</span>
-                </Titles>
+                <ImageTitle>
+                  <Titles >
+                    <span style={{  padding: '5px' }}>{imageTitle}</span>
+                  </Titles>
+                </ImageTitle>
+                
               </div>
             </div>
           );
@@ -315,6 +318,7 @@ const ImageTitle = styled.div`
 `
 
 const Titles = styled.div`
+  position: absolute; 
   top: 0px;
   width:max-contents;
   z-index: 1000; 
