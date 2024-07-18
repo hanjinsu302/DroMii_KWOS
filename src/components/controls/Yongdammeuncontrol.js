@@ -65,54 +65,170 @@
   // 용담댐 대상지 임시 데이터
   const Area = [
     {
-      name: "호계리 306",
+      name: "용담면 호계리 306",
       title:'A-1',
       acode: "p_1",
-      image:'',
       coordinate: [127.4633, 35.9392],
       description: "간접지",
-      indirectLand:'true',//간접지
-      reservoirArea:'false',//저수구역
+      indirectland:'true',//간접지 유무
+      reservoirarea:'false',//저수구역 유무
+      floodcontrolarea:'false',//홍수조절지 유무
+      listgroup :[
+        {
+          title: 'yongdamDrone:20240717_hogyeri306_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 306_NIR', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_hogyeri306_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yongdamDrone:20240717_hogyeri306_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 306_RGB', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_hogyeri306_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
     },
     {
-      name: "호계리 516-2",
+      name: "용담면 호계리 516-2",
       title:'A-2',
       acode: "p_2",
-      image:'',
       coordinate: [127.4594, 35.9234],
-      description: "간접지",
-      indirectLand:'true',//간접지
-      reservoirArea:'false',//저수구역
+      indirectland:'true',//간접지
+      reservoirarea:'false',//저수구역
+      floodcontrolarea:'false',//홍수조절지
+      listgroup :[
+        {
+          title: 'yongdamDrone:20240717_hogyeri516_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 516-2_NIR', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_hogyeri516_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yongdamDrone:20240717_hogyeri516_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 516-2_RGB', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_hogyeri516_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
     },
     {
-      name: "xx리 xxxx-2",
+      name: "상전면 월포리 1091-2",
       title:'B-1',
       acode: "p_3",
       coordinate: [127.4811, 35.8635],
-      image:'',
-      description: "간접지+저수구역",
-      indirectLand:'true',//간접지
-      reservoirArea:'true',//저수구역
+      indirectland:'true',//간접지
+      reservoirarea:'true',//저수구역
+      floodcontrolarea:'false',//홍수조절지
+      listgroup :[
+        {
+          title: 'yongdamDrone:20240717_wolpyori1091_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 월포리 1091-2_NIR', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_wolpyori1091_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yongdamDrone:20240717_wolpyori1091_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 월포리 1091-2_RGB', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_wolpyori1091_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
     },
     {
-      name: "xxx리 xxx-x",
+      name: "상전면 갈현리 621-3",
       title:'B-2',
       acode: "p_4",
-      coordinate: [127.4811, 35.8635],
-      image:'',
-      description: "간접지+저수구역",
-      indirectLand:'true',//간접지
-      reservoirArea:'true',//저수구역
+      coordinate: [127.4758, 35.8241],
+      indirectland:'false',//간접지
+      reservoirarea:'false',//저수구역
+      floodcontrolarea:'true',//홍수조절지
+      listgroup :[
+        {
+          title: 'yongdamDrone:20240717_galhyeonri621_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 갈현리 621-3_NIR', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_galhyeonri621_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yongdamDrone:20240717_galhyeonri621_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 갈현리 621-3_RGB', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_galhyeonri621_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
     },
     {
-      name: "상전면 갈현리",
+      name: "안천면 노성리 1163-61",
       title:'B-3',
       acode: "p_5",
-      coordinate: [127.4811, 35.8635],
-      image:'',
-      description: "간접지+저수구역",
-      indirectLand:'true',//간접지
-      reservoirArea:'true',//저수구역
+      coordinate: [127.5477, 35.8928],
+      indirectland:'true',//간접지
+      reservoirarea:'false',//저수구역
+      floodcontrolarea:'false',//홍수조절지
+      listgroup :[
+        {
+          title: 'yongdamDrone:20240717_nohseongri1163_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'안천면 노성리 1163-61_NIR', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_nohseongri1163_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yongdamDrone:20240717_nohseongri1163_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'안천면 노성리 1163-61_RGB', //화면에 표시할 이름
+          coordinate: '', //이미지의 좌표값
+          description: '', // 해당 데이터 설명
+          layers: 'yongdamDrone:20240717_nohseongri1163_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
     }
   ];
 
