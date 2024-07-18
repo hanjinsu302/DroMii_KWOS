@@ -4,6 +4,7 @@
 
   // mui import
   import { Box, Tab} from '@mui/material';
+  import Typography from '@mui/material/Typography';
   import { TabContext, TabList, TabPanel } from '@mui/lab';
   import CompareIcon from '@mui/icons-material/Compare';
   import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
@@ -24,6 +25,10 @@
   import Checkbox from '@mui/material/Checkbox';
   import Button from '@mui/material/Button';
   import { useNavigate } from 'react-router-dom';
+
+  import tag1 from '../../assets/tag1.png'
+  import tag2 from '../../assets/tag2.png'
+  import tag3 from '../../assets/tag3.png'
 
 
   // apexcharts import
@@ -111,10 +116,10 @@
           title: 'yongdamDrone:20240717_hogyeri516_NIR',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
-          super:'false', //SuperResolution유무
-          years:'2024',  //촬영일 연도
-          name:'용담면 호계리 516-2_NIR', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          super:'false', // SuperResolution유무
+          years:'2024',  // 촬영일 연도
+          name:'용담면 호계리 516-2_NIR', // 화면에 표시할 이름
+          coordinate: '', // 이미지의 좌표값
           description: '', // 해당 데이터 설명
           layers: 'yongdamDrone:20240717_hogyeri516_NIR', // geoserver에서 불러올 레이어 주소명
         },
@@ -513,99 +518,125 @@
                         </Accordion>
                     </TabPanel>
                   <TabPanel value="2" style={{padding:'0px'}}>
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                       <ListItem style={{padding:"0px"}}>
                         <ListItemAvatar>
                           <Avatar>
                             <FmdGoodIcon />
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="A-1" secondary="용담면 호계리 306" />
+                        <ListItemText primary="A-1" secondary="임데이터 name 값" />
                       </ListItem>
-                      <ListItem style={{padding:"0px"}}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <FmdGoodIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="A-2" secondary="용담면 호계리 516-2" />
-                      </ListItem>
-                      <ListItem style={{padding:"0px"}}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <FmdGoodIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="B-1" secondary="상전면 월포리 1091-2" />
-                      </ListItem>
-                      <ListItem style={{padding:"0px"}}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <FmdGoodIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="B-2" secondary="안천면 노성리" />
-                      </ListItem>
-                      <ListItem style={{padding:"0px"}}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <FmdGoodIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="B-3" secondary="상전면 갈현리" />
-                      </ListItem>
-                    </List>
-                
+                    </List> */}
+                     <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            <Box display="flex" alignItems="center">
+                              <Typography style={{fontSize:'14px'}}>용담면 호계리 306</Typography>
+                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                            </Box>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                              <ListItem>
+                                <Checkbox></Checkbox>
+                                <ListItemText style={{fontSize:"12px"}}>용담면 호계리 306_NIR</ListItemText>              
+                              </ListItem>
+                            </List>
+                          </AccordionDetails>
+                     </Accordion>
+                     <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            <Box display="flex" alignItems="center">
+                              <Typography style={{fontSize:'14px'}}>용담면 호계리 516-2</Typography>
+                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                            </Box>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                            </List>
+                          </AccordionDetails>
+                     </Accordion>
+                     <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            <Box display="flex" alignItems="center">
+                              <Typography style={{fontSize:'14px'}}>상전면 월포리 1091-1</Typography>
+                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                              <img src={tag2} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                            </Box>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                             
+                            </List>
+                          </AccordionDetails>
+                     </Accordion>
+                     <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            <Box display="flex" alignItems="center">
+                              <Typography style={{fontSize:'14px'}}>상전면 갈현리 621-3</Typography>
+                              <img src={tag3} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                            </Box>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                             
+                            </List>
+                          </AccordionDetails>
+                     </Accordion>
+                     <Accordion style={{marginTop:"5px"}}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            <Box display="flex" alignItems="center">
+                              <Typography style={{fontSize:'14px'}}>안천면 노성리 1163-61</Typography>
+                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
+                            </Box>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <List>
+                             
+                            </List>
+                          </AccordionDetails>
+                     </Accordion>
                   </TabPanel>
                 </Box>
               </TabContext>
             </Box>
           </MeunContainer>
           {/* <ItemBox>
-            <ItemName>A-1 | 용담면 호계리 306</ItemName>
+            <ItemName>선택한 데이터 name값</ItemName>
             <Items>
-              <ItemTitle>위성 사진 (8)</ItemTitle>
+              <ItemTitle>type: 0 위성 사진 (8)</ItemTitle>
               <ItemImg>
                 
               </ItemImg>
             </Items>
             <Items style={{backgroundColor:"#1B7DF7", color:"white"}}>
-              <ItemTitle>드론 사진 (12)</ItemTitle>
+              <ItemTitle>type: 2 드론 사진 (데이터 수 표시)</ItemTitle>
               <ItemImg>
                 <KeyboardArrowRightIcon />
               </ItemImg>
             </Items>
-          </ItemBox>
-          <ItemsBox>
-          <ItemName>드론 사진 (12)</ItemName>
-            <Items>
-              <ItemTitle>2024년 06월</ItemTitle>
-              <ItemImg>
-                <KeyboardArrowRightIcon />
-              </ItemImg>
-            </Items>
-            <Items>
-              <ItemTitle>2024년 04월</ItemTitle>
-              <ItemImg>
-                <KeyboardArrowDownIcon />
-              </ItemImg>
-            </Items>
-            <DataItems>
-              <DataItem>
-                NDVI
-              </DataItem>
-              <DataItem>
-                NDWI
-              </DataItem>
-              <DataItem>
-                RGB
-              </DataItem>
-              <DataItem>
-                NIR
-              </DataItem>
-
-            </DataItems>
-          </ItemsBox> */}
+          </ItemBox> */}
+         
 
         </>
   )
