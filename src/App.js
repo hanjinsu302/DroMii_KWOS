@@ -10,6 +10,7 @@
   import MyComponent from './pages/TestPage.js';
   //bootstrap css
   import 'bootstrap/dist/css/bootstrap.min.css';
+import CompareDronePage from './pages/CompareDronePage.js';
   
 
 
@@ -22,6 +23,7 @@
           <Route path='/YeongjuPage' element={<YeongjuPage/>}/>
           <Route path='/YongdamPage' element={<YongdamPage/>}/>
           <Route path='/compare' element={<ComparePage/>}/>
+          <Route path='/comparedrone' element={<CompareDronePage/>}/>
           <Route path='/krpano' element={<KrpanoViewer/>}/>
           <Route path='/hitmap' element={<HeatmapMap/>}/>
           <Route path='/photosphere' element={<PhotoSphere/>}/>

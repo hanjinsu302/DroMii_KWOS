@@ -250,6 +250,8 @@ const ComparePage = () => {
   };
 
   const getGridTemplate = (count, index) => {
+    if (count === 10) return { xs: 2.4 };
+    if (count === 9) return { xs: index < 5 ? 2.4 : 3 };
     if (count === 8) return { xs: 3 };
     if (count === 7) return { xs: index < 4 ? 3 : 4 };
     if (count === 6) return { xs: 4 };

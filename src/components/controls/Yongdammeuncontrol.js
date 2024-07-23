@@ -68,7 +68,7 @@
     { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_amusementpark' } },
   ];
   // 용담댐 대상지 임시 데이터
-  const Area = [
+  const DroneTiff = [
     {
       name: "용담면 호계리 306",
       title:'A-1',
@@ -80,26 +80,28 @@
       floodcontrolarea:'false',//홍수조절지 유무
       listgroup :[
         {
-          title: 'yongdamDrone:20240717_hogyeri306_NIR',
+          title: 'yeongju:YD01_NIR',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'용담면 호계리 306_NIR', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          coordinate: [127.4633, 35.9392], //이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_hogyeri306_NIR', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD01_NIR', // geoserver에서 불러올 레이어 주소명
         },
         {
-          title: 'yongdamDrone:20240717_hogyeri306_RGB',
+          title: 'yeongju:YD01_RGB',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'용담면 호계리 306_RGB', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          coordinate: [127.4633, 35.9392], //이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_hogyeri306_RGB', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD01_RGB', // geoserver에서 불러올 레이어 주소명
         },
       ]
     },
@@ -113,128 +115,137 @@
       floodcontrolarea:'false',//홍수조절지
       listgroup :[
         {
-          title: 'yongdamDrone:20240717_hogyeri516_NIR',
+          title: 'yeongju:YD02_NIR',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', // SuperResolution유무
           years:'2024',  // 촬영일 연도
           name:'용담면 호계리 516-2_NIR', // 화면에 표시할 이름
-          coordinate: '', // 이미지의 좌표값
+          coordinate: [127.4594, 35.9234], // 이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_hogyeri516_NIR', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD01_NIR', // geoserver에서 불러올 레이어 주소명
         },
         {
-          title: 'yongdamDrone:20240717_hogyeri516_RGB',
+          title: 'yeongju:YD02_RGB',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'용담면 호계리 516-2_RGB', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          coordinate: [127.4594, 35.9234], //이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_hogyeri516_RGB', // geoserver에서 불러올 레이어 주소명
-        },
-      ]
-    },
-    {
-      name: "상전면 월포리 1091-2",
-      title:'B-1',
-      acode: "p_3",
-      coordinate: [127.4811, 35.8635],
-      indirectland:'true',//간접지
-      reservoirarea:'true',//저수구역
-      floodcontrolarea:'false',//홍수조절지
-      listgroup :[
-        {
-          title: 'yongdamDrone:20240717_wolpyori1091_NIR',
-          type:'1',// 0: 위성 1: drone
-          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
-          super:'false', //SuperResolution유무
-          years:'2024',  //촬영일 연도
-          name:'상전면 월포리 1091-2_NIR', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
-          description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_wolpyori1091_NIR', // geoserver에서 불러올 레이어 주소명
-        },
-        {
-          title: 'yongdamDrone:20240717_wolpyori1091_RGB',
-          type:'1',// 0: 위성 1: drone
-          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
-          super:'false', //SuperResolution유무
-          years:'2024',  //촬영일 연도
-          name:'상전면 월포리 1091-2_RGB', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
-          description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_wolpyori1091_RGB', // geoserver에서 불러올 레이어 주소명
-        },
-      ]
-    },
-    {
-      name: "상전면 갈현리 621-3",
-      title:'B-2',
-      acode: "p_4",
-      coordinate: [127.4758, 35.8241],
-      indirectland:'false',//간접지
-      reservoirarea:'false',//저수구역
-      floodcontrolarea:'true',//홍수조절지
-      listgroup :[
-        {
-          title: 'yongdamDrone:20240717_galhyeonri621_NIR',
-          type:'1',// 0: 위성 1: drone
-          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
-          super:'false', //SuperResolution유무
-          years:'2024',  //촬영일 연도
-          name:'상전면 갈현리 621-3_NIR', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
-          description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_galhyeonri621_NIR', // geoserver에서 불러올 레이어 주소명
-        },
-        {
-          title: 'yongdamDrone:20240717_galhyeonri621_RGB',
-          type:'1',// 0: 위성 1: drone
-          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
-          super:'false', //SuperResolution유무
-          years:'2024',  //촬영일 연도
-          name:'상전면 갈현리 621-3_RGB', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
-          description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_galhyeonri621_RGB', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD02_RGB', // geoserver에서 불러올 레이어 주소명
         },
       ]
     },
     {
       name: "안천면 노성리 1163-61",
-      title:'B-3',
-      acode: "p_5",
+      title:'A-3',
+      acode: "p_3",
       coordinate: [127.5477, 35.8928],
       indirectland:'true',//간접지
       reservoirarea:'false',//저수구역
       floodcontrolarea:'false',//홍수조절지
       listgroup :[
         {
-          title: 'yongdamDrone:20240717_nohseongri1163_NIR',
+          title: 'yeongju:YD03_NIR',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'안천면 노성리 1163-61_NIR', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          coordinate: [127.5477, 35.8928], //이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_nohseongri1163_NIR', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD03_NIR', // geoserver에서 불러올 레이어 주소명
         },
         {
-          title: 'yongdamDrone:20240717_nohseongri1163_RGB',
+          title: 'yeongju:YD03_RGB',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'안천면 노성리 1163-61_RGB', //화면에 표시할 이름
-          coordinate: '', //이미지의 좌표값
+          coordinate: [127.5477, 35.8928], //이미지의 좌표값
+          zoom: 17,
           description: '', // 해당 데이터 설명
-          layers: 'yongdamDrone:20240717_nohseongri1163_RGB', // geoserver에서 불러올 레이어 주소명
+          layers: 'yeongju:YD03_RGB', // geoserver에서 불러올 레이어 주소명
         },
       ]
-    }
+    },
+    {
+      name: "상전면 월포리 1091-2",
+      title:'A-4',
+      acode: "p_4",
+      coordinate: [127.4811, 35.8635],
+      indirectland:'true',//간접지
+      reservoirarea:'true',//저수구역
+      floodcontrolarea:'false',//홍수조절지
+      listgroup :[
+        {
+          title: 'yeongju:YD04_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 월포리 1091-2_NIR', //화면에 표시할 이름
+          coordinate: [127.4811, 35.8635], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD04_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD04_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 월포리 1091-2_RGB', //화면에 표시할 이름
+          coordinate: [127.4811, 35.8635], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD04_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
+    },
+    {
+      name: "상전면 갈현리 621-3",
+      title:'A-5',
+      acode: "p_5",
+      coordinate: [127.4758, 35.8241],
+      indirectland:'false',//간접지
+      reservoirarea:'false',//저수구역
+      floodcontrolarea:'true',//홍수조절지
+      listgroup :[
+        {
+          title: 'yeongju:YD05_NIR',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 갈현리 621-3_NIR', //화면에 표시할 이름
+          coordinate: [127.4758, 35.8241], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD05_NIR', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD05_RGB',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 갈현리 621-3_RGB', //화면에 표시할 이름
+          coordinate: [127.4758, 35.8241], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD05_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+      ]
+    },
+   
   ];
 
   // 용담댐 임시 위성사진
@@ -244,7 +255,8 @@
       type: 'nir',
       years:'2023',
       name:'20230422_NIR',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_NIR',
     },
@@ -253,7 +265,8 @@
       type: 'rgb',
       years:'2023',
       name:'20230422_RGB',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_RGB',
     },
@@ -262,7 +275,8 @@
       type: 'ndvi',
       years:'2023',
       name:'20230422_NDVI',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_NDVI',
     },
@@ -271,7 +285,8 @@
       type: 'ndwi',
       years:'2023',
       name:'20230422_NDWI',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_NDWI',
     },
@@ -280,7 +295,8 @@
       type: 'rgb',
       years:'2023',
       name:'20230422_NIR_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers:'yongdamAOI:20230422_NIR_super',
     },
@@ -289,7 +305,8 @@
       type: 'nir',
       years:'2023',
       name:'20230422_RGB_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_RGB_super',
     },
@@ -298,7 +315,8 @@
       type: 'ndvi',
       years:'2023',
       name:'20230422_NDVI_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_NDVI_super',
     },
@@ -307,7 +325,8 @@
       type: 'ndwi',
       years:'2023',
       name:'20230422_NDWI_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20230422_NDWI_super',
     },
@@ -316,7 +335,8 @@
       type: 'nir',
       years:'2024',
       name:'20240610_NIR',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_NIR',
     },
@@ -325,7 +345,8 @@
       type: 'rgb',
       years:'2024',
       name:'20240610_RGB',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_RGB',
     },
@@ -334,7 +355,8 @@
       type: 'ndvi',
       years:'2024',
       name:'20240610_NDVI',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_NDVI',
     },
@@ -343,7 +365,8 @@
       type: 'ndwi',
       years:'2024',
       name:'20240610_NDWI',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_NDWI',
     },
@@ -352,7 +375,8 @@
       type: 'rgb',
       years:'2024',
       name:'20240610_NIR_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers:'yongdamAOI:20240610_NIR_super',
     },
@@ -361,7 +385,8 @@
       type: 'nir',
       years:'2024',
       name:'20240610_RGB_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_RGB_super',
     },
@@ -370,7 +395,8 @@
       type: 'ndvi',
       years:'2024',
       name:'20240610_NDVI_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_NDVI_super',
     },
@@ -379,7 +405,8 @@
       type: 'ndwi',
       years:'2024',
       name:'20240610_NDWI_super',
-      coordinate: '',
+      coordinate: [127.5256, 35.9448],
+      zoom: 10,
       description: '',
       layers: 'yongdamAOI:20240610_NDWI_super',
     },
@@ -430,7 +457,7 @@
   };
 
   const handleCompare = () => {
-    if (checked.length >= 2 && checked.length <= 8) {
+    if (checked.length >= 2 && checked.length <= 10) {
       // 선택된 항목을 비교 페이지로 전달
       navigate(`/compare?images=${checked.join(',')}`);
     } else {
@@ -438,9 +465,30 @@
     }
   };
 
+
+
+  const handleDroneToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
+  const handleDroneCompare = () => {
+    const selectedImages = checked.join(',');
+    navigate(`/comparedrone?images=${encodeURIComponent(selectedImages)}`);
+  };
+
   const filterByYear = (year) => {
     return Tiff.filter(item => item.years === year);
   };
+
 
   const renderListItems = (items) => {
     return items.map((item, index) => (
@@ -480,14 +528,11 @@
                               variant="contained" 
                               color="primary" 
                               onClick={handleCompare}
-                              disabled={checked.length < 2 || checked.length > 8}
+                              disabled={checked.length < 2 || checked.length > 10}
                               style={{marginLeft:'105px'}}
                             >
                               비교하기
                             </Button>
-
-                   
-                        
                         <Accordion style={{marginTop:"5px"}}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -517,106 +562,44 @@
                           </AccordionDetails>
                         </Accordion>
                     </TabPanel>
-                  <TabPanel value="2" style={{padding:'0px'}}>
-                    {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                      <ListItem style={{padding:"0px"}}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <FmdGoodIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="A-1" secondary="임데이터 name 값" />
-                      </ListItem>
-                    </List> */}
-                     <Accordion style={{marginTop:"5px"}}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            <Box display="flex" alignItems="center">
-                              <Typography style={{fontSize:'14px'}}>용담면 호계리 306</Typography>
-                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                            </Box>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <List>
-                              <ListItem>
-                                <Checkbox></Checkbox>
-                                <ListItemText style={{fontSize:"12px"}}>용담면 호계리 306_NIR</ListItemText>              
-                              </ListItem>
-                            </List>
-                          </AccordionDetails>
-                     </Accordion>
-                     <Accordion style={{marginTop:"5px"}}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            <Box display="flex" alignItems="center">
-                              <Typography style={{fontSize:'14px'}}>용담면 호계리 516-2</Typography>
-                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                            </Box>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <List>
-                            </List>
-                          </AccordionDetails>
-                     </Accordion>
-                     <Accordion style={{marginTop:"5px"}}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            <Box display="flex" alignItems="center">
-                              <Typography style={{fontSize:'14px'}}>상전면 월포리 1091-1</Typography>
-                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                              <img src={tag2} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                            </Box>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <List>
-                             
-                            </List>
-                          </AccordionDetails>
-                     </Accordion>
-                     <Accordion style={{marginTop:"5px"}}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            <Box display="flex" alignItems="center">
-                              <Typography style={{fontSize:'14px'}}>상전면 갈현리 621-3</Typography>
-                              <img src={tag3} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                            </Box>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <List>
-                             
-                            </List>
-                          </AccordionDetails>
-                     </Accordion>
-                     <Accordion style={{marginTop:"5px"}}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            <Box display="flex" alignItems="center">
-                              <Typography style={{fontSize:'14px'}}>안천면 노성리 1163-61</Typography>
-                              <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} />
-                            </Box>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <List>
-                             
-                            </List>
-                          </AccordionDetails>
-                     </Accordion>
-                  </TabPanel>
+                    <TabPanel value="2" style={{ padding: '0px' }}>
+      대상지역
+      <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={handleDroneCompare}
+        disabled={checked.length < 2 || checked.length > 10}
+        style={{ marginLeft: '105px' }}
+      >
+        비교하기
+      </Button>
+      {DroneTiff.map((item, index) => (
+        <Accordion key={index} style={{ marginTop: '5px' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`panel${index}-content`}
+            id={`panel${index}-header`}
+          >
+            <Box display="flex" alignItems="center">
+              <Typography style={{ fontSize: '14px' }}>{item.name}</Typography>
+              {/* <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} /> */}
+            </Box>
+          </AccordionSummary>
+          <AccordionDetails>
+            <List>
+              {item.listgroup.map((listItem, listIndex) => (
+                <ListItem key={listIndex} button onClick={handleDroneToggle(listItem.title)}>
+                  <Checkbox 
+                    checked={checked.indexOf(listItem.title) !== -1}
+                  />
+                  <ListItemText primary={listItem.name} style={{ fontSize: '12px' }} />
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </TabPanel>
                 </Box>
               </TabContext>
             </Box>
