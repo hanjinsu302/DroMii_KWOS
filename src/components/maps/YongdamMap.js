@@ -381,7 +381,7 @@
   // 지적도 레이어
       const wmsLayer3 = new TileLayer({
         source: new TileWMS({
-          url: 'http://localhost:8080/geoserver/yongdam/wms',
+          // url: 'http://localhost:8080/geoserver/yongdam/wms',
           params: {
             'LAYERS': 'yongdam:pdf_all',
           },

@@ -6,7 +6,6 @@ import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
-import Btn from '@mui/material/Button';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
 // import { DroneTiff } from './data';  // DroneTiff 데이터를 가져옵니다.
@@ -53,7 +52,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
     ]
   },
   {
-    name: "용담면 호계리 516-2",
+    name: "용담면 호계리 516",
     title:'A-2',
     acode: "p_2",
     coordinate: [127.4594, 35.9234],
@@ -67,11 +66,11 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', // SuperResolution유무
         years:'2024',  // 촬영일 연도
-        name:'용담면 호계리 516-2_NIR', // 화면에 표시할 이름
+        name:'용담면 호계리 516_NIR', // 화면에 표시할 이름
         coordinate: [127.4594, 35.9234], // 이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
-        layers: 'yeongju:YD01_NIR', // geoserver에서 불러올 레이어 주소명
+        layers: 'yeongju:YD02_NIR', // geoserver에서 불러올 레이어 주소명
       },
       {
         title: 'yeongju:YD02_RGB',
@@ -79,7 +78,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'용담면 호계리 516-2_RGB', //화면에 표시할 이름
+        name:'용담면 호계리 516_RGB', //화면에 표시할 이름
         coordinate: [127.4594, 35.9234], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -88,7 +87,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
     ]
   },
   {
-    name: "안천면 노성리 1163-61",
+    name: "안천면 노성리 1163",
     title:'A-3',
     acode: "p_3",
     coordinate: [127.5477, 35.8928],
@@ -102,7 +101,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'안천면 노성리 1163-61_NIR', //화면에 표시할 이름
+        name:'안천면 노성리 1163_NIR', //화면에 표시할 이름
         coordinate: [127.5477, 35.8928], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -114,7 +113,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'안천면 노성리 1163-61_RGB', //화면에 표시할 이름
+        name:'안천면 노성리 1163_RGB', //화면에 표시할 이름
         coordinate: [127.5477, 35.8928], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -123,7 +122,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
     ]
   },
   {
-    name: "상전면 월포리 1091-2",
+    name: "상전면 월포리 1091",
     title:'A-4',
     acode: "p_4",
     coordinate: [127.4811, 35.8635],
@@ -137,7 +136,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'상전면 월포리 1091-2_NIR', //화면에 표시할 이름
+        name:'상전면 월포리 1091_NIR', //화면에 표시할 이름
         coordinate: [127.4811, 35.8635], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -149,7 +148,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'상전면 월포리 1091-2_RGB', //화면에 표시할 이름
+        name:'상전면 월포리 1091_RGB', //화면에 표시할 이름
         coordinate: [127.4811, 35.8635], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -158,7 +157,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
     ]
   },
   {
-    name: "상전면 갈현리 621-3",
+    name: "상전면 갈현리 621",
     title:'A-5',
     acode: "p_5",
     coordinate: [127.4758, 35.8241],
@@ -172,7 +171,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'상전면 갈현리 621-3_NIR', //화면에 표시할 이름
+        name:'상전면 갈현리 621_NIR', //화면에 표시할 이름
         coordinate: [127.4758, 35.8241], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -184,7 +183,7 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
         imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
         super:'false', //SuperResolution유무
         years:'2024',  //촬영일 연도
-        name:'상전면 갈현리 621-3_RGB', //화면에 표시할 이름
+        name:'상전면 갈현리 621_RGB', //화면에 표시할 이름
         coordinate: [127.4758, 35.8241], //이미지의 좌표값
         zoom: 17,
         description: '', // 해당 데이터 설명
@@ -192,7 +191,111 @@ const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI; //http://175.45.204.16
       },
     ]
   },
- 
+  {
+    name: "상전면 용평리 140",
+    title:'A-6',
+    acode: "p_6",
+    coordinate: [127.4758, 35.8241],
+    indirectland:'false',//간접지
+    reservoirarea:'false',//저수구역
+    floodcontrolarea:'true',//홍수조절지
+    listgroup :[
+      {
+        title: 'yeongju:YD06_NIR',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', //SuperResolution유무
+        years:'2024',  //촬영일 연도
+        name:'상전면 용평리 140_NIR', //화면에 표시할 이름
+        coordinate: [127.4758, 35.8241], //이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD06_NIR', // geoserver에서 불러올 레이어 주소명
+      },
+      {
+        title: 'yeongju:YD06_RGB',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', //SuperResolution유무
+        years:'2024',  //촬영일 연도
+        name:'상전면 용평리 140_RGB', //화면에 표시할 이름
+        coordinate: [127.4758, 35.8241], //이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD06_RGB', // geoserver에서 불러올 레이어 주소명
+      },
+    ]
+  },
+  {
+    name: "상전면 용평리 1078",
+    title:'A-7',
+    acode: "p_7",
+    coordinate: [127.4758, 35.8241],
+    indirectland:'false',//간접지
+    reservoirarea:'false',//저수구역
+    floodcontrolarea:'true',//홍수조절지
+    listgroup :[
+      {
+        title: 'yeongju:YD07_NIR',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', //SuperResolution유무
+        years:'2024',  //촬영일 연도
+        name:'상전면 용평리 1078_NIR', //화면에 표시할 이름
+        coordinate: [127.4758, 35.8241], //이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD07_NIR', // geoserver에서 불러올 레이어 주소명
+      },
+      {
+        title: 'yeongju:YD07_RGB',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', //SuperResolution유무
+        years:'2024',  //촬영일 연도
+        name:'상전면 용평리 1078_RGB', //화면에 표시할 이름
+        coordinate: [127.4758, 35.8241], //이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD07_RGB', // geoserver에서 불러올 레이어 주소명
+      },
+    ]
+  },
+  {
+    name: "안천면 노성리 1505",
+    title:'A-8',
+    acode: "p_8",
+    coordinate: [127.4594, 35.9234],
+    indirectland:'true',//간접지
+    reservoirarea:'false',//저수구역
+    floodcontrolarea:'false',//홍수조절지
+    listgroup :[
+      {
+        title: 'yeongju:YD08_NIR',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', // SuperResolution유무
+        years:'2024',  // 촬영일 연도
+        name:'안천면 노성리 1505_NIR', // 화면에 표시할 이름
+        coordinate: [127.4594, 35.9234], // 이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD08_NIR', // geoserver에서 불러올 레이어 주소명
+      },
+      {
+        title: 'yeongju:YD08_RGB',
+        type:'1',// 0: 위성 1: drone
+        imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+        super:'false', //SuperResolution유무
+        years:'2024',  //촬영일 연도
+        name:'안천면 노성리 1505_RGB', //화면에 표시할 이름
+        coordinate: [127.4594, 35.9234], //이미지의 좌표값
+        zoom: 17,
+        description: '', // 해당 데이터 설명
+        layers: 'yeongju:YD08_RGB', // geoserver에서 불러올 레이어 주소명
+      },
+    ]
+  },
 ];
 
 
@@ -342,3 +445,16 @@ const CompareDronePage = () => {
 };
 
 export default CompareDronePage;
+
+
+const Btn = styled.div`
+  position: absolute;
+  top:100px;
+  background-color: white;
+  border-radius:5px;
+  width:25px;
+  height:25px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+`;
