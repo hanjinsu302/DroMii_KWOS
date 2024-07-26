@@ -12,6 +12,7 @@
   import axios from 'axios';
   // .env import
   const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
+  const openweatherapikey = process.env.REACT_APP_OPENWEATHER_APIKEY;
   //img
   // import tag4 from '../../assets/tag4.png'
   // import tag5 from '../../assets/tag5.png'
@@ -155,6 +156,8 @@
       }
     
       const { temp, temp_min, temp_max } = weatherData.main;
+      const {icon} = weatherData.weather[0];
+      const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
 
 
@@ -293,13 +296,15 @@
        </Box>
      </MeunContainer>
      <WeatherBox>
-       <WeatherIcon>A</WeatherIcon>
+       <WeatherIcon>
+        <img src={iconUrl} style={{width:"70%", height:"100%"}}/>
+       </WeatherIcon>
        <WeatherText>현재온도 {temp.toFixed(1)}°C 
             (
-            <span style={{ color: 'blue', marginLeft:'3px', marginRight:'3px'}}>
+            <span style={{ color: '#4176FF', marginLeft:'3px', marginRight:'5px'}}>
               {weatherData.main.temp_min.toFixed(1)}°C
             </span> / 
-            <span style={{ color: 'red', marginLeft:'3px', marginRight:'3px' }}>
+            <span style={{ color: '#FF4848', marginLeft:'5px', marginRight:'3px' }}>
               {weatherData.main.temp_max.toFixed(1)}°C
             </span>
             )
@@ -329,16 +334,17 @@
 
   const WeatherBox = styled.div`
       position: absolute;
-      top:30px;
+      top:10px;
       background-color: white;
-      right: 200px;
+      left: 400px;
       z-index:100000;
-      width: 280px;
+      width: 300px;
       height: 40px;
       border-radius:50px;
       display:flex;
       align-items: center;
       justify-content: center;
+      opacity:0.9;
   `
 
   const WeatherIcon = styled.div`
