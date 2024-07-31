@@ -93,6 +93,33 @@
       description: "간접지+저수구역",
       indirectLand:'true',//간접지
       reservoirArea:'true',//저수구역
+    },
+    {
+      name: "상전면 용평리 140",
+      acode: "p_6",
+      coordinate: [127.5071, 35.8759],
+      image:'',
+      description: "간접지+저수구역",
+      indirectLand:'true',//간접지
+      reservoirArea:'true',//저수구역
+    },
+    {
+      name: "상전면 용평리 1078",
+      acode: "p_7",
+      coordinate: [127.5016, 35.8798],
+      image:'',
+      description: "간접지+저수구역",
+      indirectLand:'true',//간접지
+      reservoirArea:'true',//저수구역
+    },
+    {
+      name: "안천면 노성리 1505",
+      acode: "p_8",
+      coordinate: [127.5418, 35.898],
+      image:'',
+      description: "간접지+저수구역",
+      indirectLand:'true',//간접지
+      reservoirArea:'true',//저수구역
     }
   ];
 
