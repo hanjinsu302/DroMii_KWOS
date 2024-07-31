@@ -127,7 +127,7 @@
                 </Tooltip>
               }
             >
-                <LayerBox onClick={() => onLayerToggle('wmsLayer3')}>
+                <LayerBox onClick={() => onLayerToggle('cadastralvectorLayer')}>
                 <GridViewIcon/>
                 </LayerBox>
             </OverlayTrigger>

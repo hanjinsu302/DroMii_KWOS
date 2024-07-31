@@ -676,7 +676,7 @@
                               color="primary" 
                               onClick={handleCompare}
                               disabled={checked.length < 2 || checked.length > 10}
-                              style={{marginLeft:'105px'}}
+                              style={{marginLeft:'90px'}}
                             >
                               비교하기
                             </Button>
@@ -716,7 +716,7 @@
         color="primary" 
         onClick={handleDroneCompare}
         disabled={checked.length < 2 || checked.length > 10}
-        style={{ marginLeft: '105px' }}
+        style={{ marginLeft: '90px' }}
       >
         비교하기
       </Button>
@@ -756,14 +756,14 @@
         <img src={iconUrl} style={{width:"70%", height:"100%"}}/>
        </WeatherIcon>
        <WeatherText>현재온도 {temp.toFixed(1)}°C 
-            (
+            {/* (
             <span style={{ color: '#4176FF', marginLeft:'3px', marginRight:'5px'}}>
               {temp_min.toFixed(1)}°C
             </span> / 
             <span style={{ color: '#FF4848', marginLeft:'5px', marginRight:'3px' }}>
               {temp_max.toFixed(1)}°C
             </span>
-            )
+            ) */}
             </WeatherText>
      </WeatherBox>
         </>
@@ -779,105 +779,35 @@
         display:flex;
       `
 
-      const ItemBox = styled.div`
-        position:absolute;
-        width:180px;
-        height:250px;
-        background-color:white;
-        left:355px;
-        z-index:10000;
-        top:80px;
-        border-radius:5px;
-      `
-      const ItemName = styled.div`
-        font-size:13px;
-        background-color: #2B7DF7;
-        width:100%;
-        height:35px;
-        display:flex;
-        align-items:center;
-        padding-left:10px;
-        border-radius: 5px 5px 0px 0px;
-        color:white;
-        font-style: bold;
-      `
-      const Items = styled.div`
-        width:100%;
-        height:35px;
-        display:flex;
-        align-items:center;
-      `
-      const ItemTitle = styled.div`
-        height:100%;
-        width:85%;
-        display:flex;
-        align-items:center;
-        padding-left:10px;
-        font-size:12px;
-      `
-      const ItemImg = styled.div`
-        display:flex;
-        align-items:center;
-        justify-contents:center;
-      `
-
-      const ItemsBox = styled.div`
-        position:absolute;
-        width:250px;
-        height:350px;
-        background-color:white;
-        left:540px;
-        z-index:10000;
-        top:80px;
-        border-radius:5px;
-        overflow:scroll;
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-        &::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-        }  
-      `
-
-      const DataItems = styled.div`
-        width:100%;
-        height:max-contents;
-      `;
-      const DataItem = styled.div`
-        width:100%;
-        height:max-contents;
-        font-size:12px;
-        padding-left:15px;
-      `;
-
       const WeatherBox = styled.div`
-      position: absolute;
-      top:10px;
-      background-color: white;
-      left: 400px;
-      z-index:100000;
-      width: 300px;
-      height: 40px;
-      border-radius:50px;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-      opacity:0.9;
-  `
+        position: absolute;
+        top:10px;
+        background-color: white;
+        left: 400px;
+        z-index:100000;
+        width: 180px;
+        height: 40px;
+        border-radius:50px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        opacity:0.9;
+      `
 
-  const WeatherIcon = styled.div`
-      width:20%;
-      height:100%;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-  `
+      const WeatherIcon = styled.div`
+          width:55px;
+          height:100%;
+          display:flex;
+          align-items: center;
+          justify-content: center;
+      `
 
   const WeatherText = styled.div`
-      width:80%;
+      width:125px;
       height:100%;
       display:flex;
       align-items: center;
-      font-size:14px;
+      font-size:13px;
   `
 
 

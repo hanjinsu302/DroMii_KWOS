@@ -18,9 +18,9 @@ const TestPage = () => {
   const popupRef = useRef();
 
   useEffect(() => {
-    const vectorSource = new VectorSource({
+    const cadastralvectorSource = new VectorSource({
       features: new GeoJSON().readFeatures(geojsonData, {
-        featureProjection: 'EPSG:3857'
+        featureProjection: 'EPSG:4326'
       })
     });
 
@@ -44,8 +44,8 @@ const TestPage = () => {
       })
     });
 
-    const vectorLayer = new VectorLayer({
-      source: vectorSource,
+    const cadastralvectorLayer = new VectorLayer({
+      source: cadastralvectorSource,
       style: (feature) => {
         // Return the selectStyle for the selected feature, otherwise return the defaultStyle
         return feature === selectedFeature ? selectStyle : defaultStyle;
@@ -58,7 +58,7 @@ const TestPage = () => {
         new TileLayer({
           source: new OSM()
         }),
-        vectorLayer
+        cadastralvectorLayer
       ],
       view: new View({
         center: fromLonLat([127.502, 35.88]),
@@ -80,7 +80,7 @@ const TestPage = () => {
         featureFound = true;
         if (selectedFeature) {
           // Reset the style of the previously selected feature
-          vectorLayer.getSource().forEachFeature((f) => {
+          cadastralvectorLayer.getSource().forEachFeature((f) => {
             if (f === selectedFeature) {
               f.setStyle(defaultStyle);
             }
