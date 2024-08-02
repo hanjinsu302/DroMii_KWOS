@@ -22,6 +22,7 @@
   import Point from 'ol/geom/Point';
   import { Cluster } from 'ol/source';
   import { GeoJSON } from 'ol/format';
+  import { Select } from 'ol/interaction';
   import 'ol/ol.css';
   //react-screenshot import
   import html2canvas from "html2canvas";
@@ -481,38 +482,40 @@
       });
 
       //////////////////////////지적도 레이어 Source
-      const cadastralvectorSource = new VectorSource({
-        features: new GeoJSON().readFeatures(geojsonData, {
-          featureProjection: 'EPSG:3857'
-        })
-      });
       const defaultStyle = new Style({
         fill: new Fill({
-          color: 'rgba(193, 140, 1, 0.5)'
+          color: 'rgba(193, 140, 1, 0.5)',
         }),
         stroke: new Stroke({
           color: '#bfbfbf',
-          width: 0.5
-        })
+          width: 0.5,
+        }),
       });
-  
+      
       const selectStyle = new Style({
         fill: new Fill({
-          color: 'rgba(0, 0, 255, 0.1)'
+          color: 'rgba(0, 0, 255, 0.1)',
         }),
         stroke: new Stroke({
           color: '#0000ff',
-          width: 2
-        })
+          width: 2,
+        }),
       });
-  
+      
+      // Create VectorSource using GeoJSON data
+      const cadastralvectorSource = new VectorSource({
+        features: new GeoJSON().readFeatures(geojsonData, {
+          featureProjection: 'EPSG:3857',
+        }),
+      });
+      
+      // Create VectorLayer with styles and source
       const cadastralvectorLayer = new VectorLayer({
         source: cadastralvectorSource,
         style: (feature) => {
-          // Return the selectStyle for the selected feature, otherwise return the defaultStyle
           return feature.get('selected') ? selectStyle : defaultStyle;
         },
-        visible: visibleLayers.cadastralvectorLayer,
+        visible: visibleLayers.cadastralvectorLayer, // Controlled by visibleLayers state
       });
 
 
@@ -543,6 +546,7 @@
       return () => mapInstance.current?.map.setTarget(null);
     }, [mapType]);
 
+    //지역AOI, 하천, 지적도, 파노라마 포인트 visible 관리
     useEffect(() => {
       if (mapInstance.current) {
         const { wmsLayer1, wmsLayer2, clusterLayer, cadastralvectorLayer } = mapInstance.current.layers;
@@ -562,6 +566,85 @@
         });
       }
     }, [additionalLayers]);
+
+    //맵 변경 시에도 지적도 레이어 선택 및 정보 표시 
+    useEffect(() => {
+      if (mapInstance.current) {
+        const map = mapInstance.current.map;
+        
+        // Remove old select interaction if it exists
+        if (mapInstance.current.selectInteraction) {
+          map.removeInteraction(mapInstance.current.selectInteraction);
+        }
+    
+        // Create a new select interaction
+        mapInstance.current.selectInteraction = new Select({
+          layers: [mapInstance.current.layers.cadastralvectorLayer],
+         
+        });
+    
+        // Add the new select interaction to the map
+        map.addInteraction(mapInstance.current.selectInteraction);
+    
+        // Remove old popup overlay if it exists
+        if (mapInstance.current.popupOverlay) {
+          map.removeOverlay(mapInstance.current.popupOverlay);
+        }
+    
+        // Create and add a new popup overlay
+        mapInstance.current.popupOverlay = new Overlay({
+          element: popupRef.current,
+          positioning: 'bottom-center',
+          stopEvent: false,
+          offset: [0, -10],
+        });
+        map.addOverlay(mapInstance.current.popupOverlay);
+    
+        // Handle feature selection
+        const handleSelect = (event) => {
+          const selected = event.selected[0];
+          if (selected) {
+            const properties = selected.getProperties();
+            setSelectedFeature(selected);
+            setPopupContent(`PNU: ${properties.PNU}, JIBUN: ${properties.JIBUN}`);
+    
+            // Set popup position to the clicked coordinates
+            const coordinates = selected.getGeometry().getCoordinates();
+            mapInstance.current.popupOverlay.setPosition(coordinates);
+          } else {
+            setSelectedFeature(null);
+            setPopupContent('');
+            mapInstance.current.popupOverlay.setPosition(undefined);
+          }
+        };
+    
+        mapInstance.current.selectInteraction.on('select', handleSelect);
+    
+        // Cleanup function
+        return () => {
+          map.removeInteraction(mapInstance.current.selectInteraction);
+          if (mapInstance.current.popupOverlay) {
+            map.removeOverlay(mapInstance.current.popupOverlay);
+            mapInstance.current.popupOverlay = null;
+          }
+        };
+      }
+    }, [mapType]); // Depend on mapType to re-create the interaction on mode change
+    //지적도 레이어 선택 
+    useEffect(() => {
+      if (mapInstance.current) {
+        const map = mapInstance.current.map;
+    
+        // Ensure that the popup is positioned correctly when the selected feature changes
+        if (selectedFeature) {
+          const coordinates = selectedFeature.getGeometry().getCoordinates();
+          mapInstance.current.popupOverlay.setPosition(coordinates);
+        }
+      }
+    }, [selectedFeature]); // Ensure popup position updates when selectedFeature changes
+    
+    
+    
 
     const handleLayerVisibility = (layer) => {
       setVisibleLayers((prevState) => ({
@@ -604,24 +687,27 @@
         console.error("Error converting div to image:", error);
       }
     };
-    //html 요소는 촬영이 되지만 openlayers의 canvas요소는 촬영이 안됨
-
-
-    
-    
-
+   
     return (
       <>
       <Container ref={divRef}>
         <Yongdammeuncontrol onLayerToggle={handleAdditionalLayerVisibility} />
         <YongdamMapcontrol onSelectMapType={setMapType} onLayerToggle={handleLayerVisibility} onMeasureDistance={() => handleMeasureButtonClick('LineString')} onMeasureArea={() => handleMeasureButtonClick('Polygon')} onClearMeasurements={clearMeasurements} onCapture= {handleDownload}/>
           <div ref={mapRef} style={{ width: '100%', height: '100vh' }} ></div>
+          {selectedFeature && (
+            <div id="popup" class="ol-popup" ref={popupRef}>
+              {/* <a href="#" id="popup-closer" class="ol-popup-closer"></a> */}
+              <div id="popup-content"> {popupContent}</div>
+            </div>
+          )}
         </Container>
       </>
     );
   };
 
   export default YongdamMap;
+  
+ 
 
   const Container = styled.div`
   display:flex;
@@ -659,6 +745,49 @@
         }
         .ol-tooltip-static:before {
           border-top-color: #ffcc33;
+        }
+
+        .ol-popup {
+          position: absolute;
+          background-color: white;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+          padding: 15px;
+          border-radius: 10px;
+          border: 1px solid #cccccc;
+          top:10px;
+          right:30px;
+          min-width: 280px;
+          z-index:100000;
+        }
+        .ol-popup:after, .ol-popup:before {
+          top: 100%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+        .ol-popup:after {
+          border-top-color: white;
+          border-width: 10px;
+          left: 48px;
+          margin-left: -10px;
+        }
+        .ol-popup:before {
+          border-top-color: #cccccc;
+          border-width: 11px;
+          left: 48px;
+          margin-left: -11px;
+        }
+        .ol-popup-closer {
+          text-decoration: none;
+          position: absolute;
+          top: 2px;
+          right: 8px;
+        }
+        .ol-popup-closer:after {
+          content: "✖";
         }
   `
 
