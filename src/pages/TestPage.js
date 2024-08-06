@@ -267,7 +267,8 @@ const ComparePage = () => {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: 'http://res.dromii.com:3003/jobs/j_270/orthophoto',
+            url: 'http://175.45.204.163/api/yongdam/get-v2image/j_261',
+            //url: 'http://res.dromii.com:3003/jobs/j_270/orthophoto',
           }),
         }),
       ],

@@ -51,7 +51,7 @@
         acode: "a_3",
         coordinate: [127.269311, 37.413294],
         description: "서울댐입니다",
-        page:"SeoulPage"
+        page:"testpage"
       },
       {
         name: "부산댐",

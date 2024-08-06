@@ -9,8 +9,16 @@
   import { Tile as TileLayer } from 'ol/layer';
   import { TileWMS, XYZ, OSM } from 'ol/source';
   import { fromLonLat } from 'ol/proj';
+  import { Vector as VectorSource } from 'ol/source';
+  import { Vector as VectorLayer } from 'ol/layer';
+  import { Feature } from 'ol';
+  import Point from 'ol/geom/Point';
+  import { Cluster } from 'ol/source';
+  import { Circle as CircleStyle, Fill, Stroke, Style, Icon } from 'ol/style';
   import 'ol/ol.css';
   import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
+  // img
+  import pin from '../../assets/pin.png'
   // .env import
   const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
 
@@ -45,6 +53,43 @@
         initialState[layer.name] = false;
       });
       return initialState;
+    });
+    const yeongjudamClusterData = [
+      {
+        coordinate: [128.6552, 36.7234],  // 진안군 안천면 안용로 747의 좌표
+        name: 'yeongjudam Cluster',
+        image: 'url/to/image.jpg',  // 필요시 이미지 경로 추가
+        description: 'yeongjudam Cluster description',
+        page: 'url/to/page'  // 필요시 페이지 링크 추가
+      }
+    ];
+
+    const yeongjudamVectorSource = new VectorSource({
+      features: yeongjudamClusterData.map(area => new Feature({
+        geometry: new Point(fromLonLat(area.coordinate)),
+        name: area.name,
+        image: area.image,
+        description: area.description,
+        page: area.page
+      }))
+    });
+
+    const yeongjudamClusterSource = new Cluster({
+      distance: 40,
+      source: yeongjudamVectorSource
+    });
+    const yeongjudamClusterLayer = new VectorLayer({
+      source: yeongjudamClusterSource,
+      style: (feature) => {
+        const size = feature.get('features').length;
+        return new Style({
+          image: new Icon({
+            src: pin,  // Replace with the path to your custom image
+            scale: 0.4 + Math.min(size / 300, 0.5),  // Adjust scale based on cluster size
+            anchor: [0.5, 0.5]
+          }),
+        });
+      }
     });
 
     const scaleLineControl = new ScaleLine({
@@ -138,7 +183,7 @@
       const map = new Map({
         controls: defaultControls().extend([scaleLineControl]),
         target: mapRef.current,
-        layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3, ...Object.values(additionalLayersConfig)],
+        layers: [osmLayer, vworldLayer, wmsLayer1, wmsLayer2, wmsLayer3,yeongjudamClusterLayer, ...Object.values(additionalLayersConfig)],
         view: new View({
           center: fromLonLat([128.8, 36.8]),
           zoom: 11,
@@ -148,7 +193,7 @@
         
       });
 
-      mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer, ...additionalLayersConfig } };
+      mapInstance.current = { map, layers: { wmsLayer1, wmsLayer2, wmsLayer3, vworldLayer,yeongjudamClusterLayer, ...additionalLayersConfig } };
     };
 
     useEffect(() => {
