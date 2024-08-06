@@ -606,7 +606,7 @@
           if (selected) {
             const properties = selected.getProperties();
             setSelectedFeature(selected);
-            setPopupContent(`PNU: ${properties.PNU}, JIBUN: ${properties.JIBUN}`);
+            setPopupContent(`PNU: ${properties.PNU}, 지번: ${properties.JIBUN}`);
     
             // Set popup position to the clicked coordinates
             const coordinates = selected.getGeometry().getCoordinates();

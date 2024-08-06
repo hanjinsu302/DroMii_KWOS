@@ -8,10 +8,12 @@
   import YeongjuPage from './pages/YeongjuPage.js';
   import HeatmapMap from './components/maps/Hitmap.js';
   import MyComponent from './pages/TestPage.js';
+  import CompareDronePage from './pages/CompareDronePage.js';
+  import OrthophotoPage from './pages/OrthophotoPage.js';
+  
   //bootstrap css
   import 'bootstrap/dist/css/bootstrap.min.css';
-import CompareDronePage from './pages/CompareDronePage.js';
-  
+
 
 
 
@@ -24,6 +26,7 @@ import CompareDronePage from './pages/CompareDronePage.js';
           <Route path='/YongdamPage' element={<YongdamPage/>}/>
           <Route path='/compare' element={<ComparePage/>}/>
           <Route path='/comparedrone' element={<CompareDronePage/>}/>
+          <Route path='/orthophoto' element={<OrthophotoPage/>}/>
           <Route path='/krpano' element={<KrpanoViewer/>}/>
           <Route path='/hitmap' element={<HeatmapMap/>}/>
           <Route path='/photosphere' element={<PhotoSphere/>}/>

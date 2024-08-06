@@ -729,7 +729,7 @@
           >
             <Box display="flex" alignItems="center">
               <Typography style={{ fontSize: '14px' }}>{item.name}</Typography>
-              {/* <img src={tag1} alt="Tag" style={{ marginLeft: '8px', width: '18px', height: '18px' }} /> */}
+             
             </Box>
           </AccordionSummary>
           <AccordionDetails style={{padding:'0px'}}>
@@ -781,9 +781,9 @@
 
       const WeatherBox = styled.div`
         position: absolute;
-        top:10px;
+        bottom:10px;
         background-color: white;
-        left: 400px;
+        right: 250px;
         z-index:100000;
         width: 180px;
         height: 40px;

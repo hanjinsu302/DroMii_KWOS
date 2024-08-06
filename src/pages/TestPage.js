@@ -267,12 +267,12 @@ const ComparePage = () => {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: 'http://res.dromii.com:3003/jobs/j_237/orthophoto/',
+            url: 'http://res.dromii.com:3003/jobs/j_270/orthophoto',
           }),
         }),
       ],
       view: new View({
-        center:fromLonLat([127.463258378, 35.939122336]) ,
+        center:fromLonLat([127.501309672, 35.879741568]) ,
         zoom: 12,
       }),
     });
