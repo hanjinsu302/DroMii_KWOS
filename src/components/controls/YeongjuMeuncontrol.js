@@ -21,36 +21,21 @@
 
   const YeongjuMeuncontrol = ({ onLayerToggle }) => {
     
-        const layerConfigurations = [
-          { 
-            name: '전', 
-            url: `${geoserverUrl}/yeongju/wms`, 
-            params: { 'LAYERS': 'yeongju:K_water_field' } },
-          { 
-            name: '답', 
-            url: `${geoserverUrl}/yeongju/wms`, 
-            params: { 'LAYERS': 'yeongju:K_water_ricepaddy' } },
-          { 
-            name: '과수원', 
-            url: `${geoserverUrl}/yeongju/wms`, 
-            params: { 'LAYERS': 'yeongju:K_water_orchard' } },
-          { 
-            name: '목장용지', 
-            url: `${geoserverUrl}/yeongju/wms`, 
-            params: { 'LAYERS': 'yeongju:K_water_pasture' } },
-          { 
-            name: '임야', 
-            url: `${geoserverUrl}/yeongju/wms`, 
-            params: { 'LAYERS': 'yeongju:K_water_forest' } },
-          { name: '광천지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_gwangcheonki' } },
-          { name: '대지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_earth' } },
-          { name: '공장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_factory' } },
-          { name: '학교용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_school' } },
-          { name: '주차장, 도로', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_road' } },
-          { name: '주유소', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_gasstation' } },
-          { name: '체육용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_athletic' } },
-          { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_amusementpark' } },
-        ];
+    const layerConfigurations = [
+      { name: '전', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryField' } },
+      { name: '답', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryRicepaddy' } },
+      { name: '과수원', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryOrchard' } },
+      { name: '목장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryPasture' } },
+      { name: '임야', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryForest' } },
+      { name: '광천지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryGwangcheonji' } },
+      { name: '대지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryEarth' } },
+      { name: '공장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryFactory' } },
+      { name: '학교용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategorySchool' } },
+      { name: '주차장, 도로', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryRoad' } },
+      { name: '주유소', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryGasstaion' } },
+      { name: '체육용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryAthletic' } },
+      { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryAmusementpark' } },
+    ];
       
       
 
