@@ -36,40 +36,24 @@
   // apexcharts import
   // .env import
   const geoserverUrl = process.env.REACT_APP_GEOSERVER_URI;
-  
 
 
-  // k워터 중분류 임시 데이터
   const layerConfigurations = [
-    { 
-      name: '전', 
-      url: `${geoserverUrl}/yeongju/wms`, 
-      params: { 'LAYERS': 'yeongju:K_water_field' } },
-    { 
-      name: '답', 
-      url: `${geoserverUrl}/yeongju/wms`, 
-      params: { 'LAYERS': 'yeongju:K_water_ricepaddy' } },
-    { 
-      name: '과수원', 
-      url: `${geoserverUrl}/yeongju/wms`, 
-      params: { 'LAYERS': 'yeongju:K_water_orchard' } },
-    { 
-      name: '목장용지', 
-      url: `${geoserverUrl}/yeongju/wms`, 
-      params: { 'LAYERS': 'yeongju:K_water_pasture' } },
-    { 
-      name: '임야', 
-      url: `${geoserverUrl}/yeongju/wms`, 
-      params: { 'LAYERS': 'yeongju:K_water_forest' } },
-    { name: '광천지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_gwangcheonki' } },
-    { name: '대지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_earth' } },
-    { name: '공장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_factory' } },
-    { name: '학교용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_school' } },
-    { name: '주차장, 도로', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_road' } },
-    { name: '주유소', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_gasstation' } },
-    { name: '체육용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_athletic' } },
-    { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:K_water_amusementpark' } },
+    { name: '전', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryField' } },
+    { name: '답', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryRicepaddy' } },
+    { name: '과수원', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryOrchard' } },
+    { name: '목장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryPasture' } },
+    { name: '임야', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryForest' } },
+    { name: '광천지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryGwangcheonji' } },
+    { name: '대지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryEarth' } },
+    { name: '공장용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryFactory' } },
+    { name: '학교용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategorySchool' } },
+    { name: '주차장, 도로', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryRoad' } },
+    { name: '주유소', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryGasstaion' } },
+    { name: '체육용지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryAthletic' } },
+    { name: '유원지', url: `${geoserverUrl}/yeongju/wms`, params: { 'LAYERS': 'yeongju:KwaterCategoryAmusementpark' } },
   ];
+  
   // 용담댐 대상지 임시 데이터
   const DroneTiff = [
     {
@@ -84,6 +68,7 @@
       listgroup :[
         {
           title: 'yeongju:YD01_NIR',
+          jcode: 'j_251',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -96,6 +81,7 @@
         },
         {
           title: 'yeongju:YD01_RGB',
+          jcode: 'j_237',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -103,6 +89,18 @@
           name:'용담면 호계리 306_RGB', //화면에 표시할 이름
           coordinate: [127.4633, 35.9392], //이미지의 좌표값
           zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD01_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD01_RGB_M3M',
+          jcode: 'j_243',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 306_RGB_M3M', //화면에 표시할 이름
+          coordinate: [127.4633, 35.9392], //이미지의 좌표값
           description: '', // 해당 데이터 설명
           layers: 'yeongju:YD01_RGB', // geoserver에서 불러올 레이어 주소명
         },
@@ -119,6 +117,7 @@
       listgroup :[
         {
           title: 'yeongju:YD02_NIR',
+          jcode: 'j_253',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', // SuperResolution유무
@@ -131,11 +130,25 @@
         },
         {
           title: 'yeongju:YD02_RGB',
+          jcode: 'j_238',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'용담면 호계리 516_RGB', //화면에 표시할 이름
+          coordinate: [127.4594, 35.9234], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD02_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD02_RGB_M3M',
+          jcode: 'j_244',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'용담면 호계리 516_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.4594, 35.9234], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -154,6 +167,7 @@
       listgroup :[
         {
           title: 'yeongju:YD03_NIR',
+          jcode: 'j_254',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -166,11 +180,25 @@
         },
         {
           title: 'yeongju:YD03_RGB',
+          jcode: 'j_239',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'안천면 노성리 1163_RGB', //화면에 표시할 이름
+          coordinate: [127.5477, 35.8928], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD03_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD03_RGB_M3M',
+          jcode: 'j_245',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'안천면 노성리 1163_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.5477, 35.8928], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -189,6 +217,7 @@
       listgroup :[
         {
           title: 'yeongju:YD04_NIR',
+          jcode: 'j_255',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -201,11 +230,25 @@
         },
         {
           title: 'yeongju:YD04_RGB',
+          jcode: 'j_242',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'상전면 월포리 1091_RGB', //화면에 표시할 이름
+          coordinate: [127.4811, 35.8635], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD04_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD04_RGB_M3M',
+          jcode: 'j_246',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 월포리 1091_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.4811, 35.8635], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -224,6 +267,7 @@
       listgroup :[
         {
           title: 'yeongju:YD05_NIR',
+          jcode: 'j_256',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -236,11 +280,25 @@
         },
         {
           title: 'yeongju:YD05_RGB',
+          jcode: 'j_241',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'상전면 갈현리 621_RGB', //화면에 표시할 이름
+          coordinate: [127.4758, 35.8241], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD05_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD05_RGB_M3M',
+          jcode: 'j_247',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 갈현리 621_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.4758, 35.8241], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -259,6 +317,7 @@
       listgroup :[
         {
           title: 'yeongju:YD06_NIR',
+          jcode: 'j_257',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -271,11 +330,25 @@
         },
         {
           title: 'yeongju:YD06_RGB',
+          jcode: 'j_260',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'상전면 용평리 140_RGB', //화면에 표시할 이름
+          coordinate: [127.4758, 35.8241], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD06_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD06_RGB_M3M',
+          jcode: 'j_265',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 용평리 140_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.4758, 35.8241], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -294,6 +367,7 @@
       listgroup :[
         {
           title: 'yeongju:YD07_NIR',
+          jcode: 'j_258',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -306,11 +380,25 @@
         },
         {
           title: 'yeongju:YD07_RGB',
+          jcode: 'j_261',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
           years:'2024',  //촬영일 연도
           name:'상전면 용평리 1078_RGB', //화면에 표시할 이름
+          coordinate: [127.4758, 35.8241], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD07_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD07_RGB_M3M',
+          jcode: 'j_263',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'상전면 용평리 1078_RGB_M3M', //화면에 표시할 이름
           coordinate: [127.4758, 35.8241], //이미지의 좌표값
           zoom: 17,
           description: '', // 해당 데이터 설명
@@ -329,6 +417,7 @@
       listgroup :[
         {
           title: 'yeongju:YD08_NIR',
+          jcode: 'j_259',
           type:'1',// 0: 위성 1: drone
           imgtype: '1', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', // SuperResolution유무
@@ -341,6 +430,20 @@
         },
         {
           title: 'yeongju:YD08_RGB',
+          jcode: 'j_262',
+          type:'1',// 0: 위성 1: drone
+          imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
+          super:'false', //SuperResolution유무
+          years:'2024',  //촬영일 연도
+          name:'안천면 노성리 1505_RGB', //화면에 표시할 이름
+          coordinate: [127.4594, 35.9234], //이미지의 좌표값
+          zoom: 17,
+          description: '', // 해당 데이터 설명
+          layers: 'yeongju:YD08_RGB', // geoserver에서 불러올 레이어 주소명
+        },
+        {
+          title: 'yeongju:YD08_RGB',
+          jcode: 'j_264',
           type:'1',// 0: 위성 1: drone
           imgtype: '0', // 0:rgb 1:nir 2:ndvi 3:ndwi
           super:'false', //SuperResolution유무
@@ -574,22 +677,22 @@
 
 
 
-  const handleDroneToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const handleDroneToggle = (jcode) => () => {
+    const currentIndex = checked.indexOf(jcode);
     const newChecked = [...checked];
-
+  
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(jcode);
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
+  
     setChecked(newChecked);
   };
-
+  
   const handleDroneCompare = () => {
-    const selectedImages = checked.join(',');
-    navigate(`/comparedrone?images=${encodeURIComponent(selectedImages)}`);
+    const selectedJcodes = checked.join(','); // 선택된 jcode를 콤마로 구분하여 문자열로 결합
+    navigate(`/comparedrone?jcodes=${encodeURIComponent(selectedJcodes)}`);
   };
 
   const filterByYear = (year) => {
